@@ -1,11 +1,9 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { HiMiniXMark } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import Button from "./Button";
-
-import { useOverflowHidden } from "../hooks/useOverflowHidden";
 
 type Props = {
   isOpen: boolean;
@@ -13,7 +11,15 @@ type Props = {
 };
 
 export default function Sidebar({ isOpen, setIsOpen }: Props) {
-  // useOverflowHidden();
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    if (!isOpen) {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
 
   return (
     <div
