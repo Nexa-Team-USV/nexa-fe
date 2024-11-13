@@ -14,7 +14,7 @@
   }
 
   .scrollbar::-webkit-scrollbar-track {
-    @apply bg-secondary;
+    @apply rounded-full bg-secondary;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {

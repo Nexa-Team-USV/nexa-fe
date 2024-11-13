@@ -2,7 +2,7 @@ import { HTMLProps } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 
 const logoVariants = cva(
-  "w-min rounded-lg px-4 py-1 text-3xl font-bold uppercase",
+  "w-min rounded-lg px-4 py-1 text-2xl sm:text-3xl font-bold uppercase",
   {
     variants: {
       variant: {
