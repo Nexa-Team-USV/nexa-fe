@@ -6,9 +6,9 @@ const buttonVariants = cva("disabled:cursor-no-drop", {
   variants: {
     variant: {
       primary:
-        "bg-primary rounded-lg px-2 py-1.5 text-white hover:bg-blue-500 transition-colors disabled:bg-blue-500",
+        "bg-primary rounded-lg px-2 py-1.5 text-white hover:bg-primary-hover transition-colors disabled:bg-primary-disabled",
       secondary:
-        "bg-white rounded-lg px-2 py-1.5 text-primary font-medium transition-colors hover:bg-blue-100 disabled:bg-blue-100",
+        "bg-white rounded-lg px-2 py-1.5 text-primary font-medium transition-colors hover:bg-secondary-hover disabled:bg-secondary-disabled",
       empty: "",
     },
     size: {

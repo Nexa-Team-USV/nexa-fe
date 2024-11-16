@@ -7,7 +7,9 @@ import Label from "../../../components/Label";
 import Input from "../../../components/Input";
 import Message from "../../../components/Message";
 import Button from "../../../components/Button";
-import { HiMiniPlus } from "react-icons/hi2";
+import AccountsToDeleteList from "./AccountsToDeleteList";
+
+export type AccountToDelete = { id: number; email: string };
 
 const formSchema = z.object({
   email: z.string().min(2, "Error message example..."),
@@ -20,18 +22,32 @@ export default function DeleteAccountsForm() {
       email: "",
     },
   });
-  const [accountsToDelete, setAccountsToDelete] = useState<
-    { id: number; email: string }[]
-  >([]);
+  const [accountsToDelete, setAccountsToDelete] = useState<AccountToDelete[]>(
+    [],
+  );
 
-  const { errors } = methods.formState;
+  const {
+    trigger,
+    getValues,
+    formState: { errors, isValid },
+  } = methods;
+
+  function handleAddEmail() {
+    trigger();
+
+    if (isValid) {
+      setAccountsToDelete((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          ...getValues(),
+        },
+      ]);
+    }
+  }
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
     console.log(data);
-    setAccountsToDelete((prev) => [
-      ...prev,
-      { id: prev.length + 1, email: data.email },
-    ]);
   };
 
   return (
@@ -41,45 +57,40 @@ export default function DeleteAccountsForm() {
         className="grid grid-cols-2 gap-x-16 gap-y-4"
       >
         <div className="col-span-2 flex flex-col gap-1">
-          <Label htmlFor="email">Email</Label>
-          <div className="flex items-center gap-4">
-            <Input
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Enter your email..."
-            />
-            <Button
-              type="submit"
-              variant="empty"
-              className="rounded-full bg-primary p-1"
-            >
-              <HiMiniPlus className="stroke-1 text-2xl text-white" />
-            </Button>
-          </div>
+          <Label htmlFor="emailToDelete">Email</Label>
+          <Input
+            type="text"
+            name="email"
+            id="emailToDelete"
+            placeholder="Enter your email..."
+          />
           {errors.email && (
             <Message variant="error">{errors.email?.message}</Message>
           )}
         </div>
 
-        {accountsToDelete.length ? (
-          <ul className="col-span-2 row-start-2 rounded-lg bg-white p-4">
-            {accountsToDelete.map((account) => (
-              <li key={account.id}>
-                <span>{`${account.id}.) `}</span>
-                {account.email}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="col-span-2 row-start-2">No emails added...</p>
-        )}
-
         <Button
           type="submit"
-          onClick={(e) => e.preventDefault()}
-          className="col-start-1 row-start-3"
+          onClick={(e) => {
+            e.preventDefault();
+            handleAddEmail();
+          }}
+          className="row-start-2"
         >
+          Add
+        </Button>
+
+        {accountsToDelete.length ? (
+          <div className="col-span-2 row-start-3">
+            <AccountsToDeleteList accounts={accountsToDelete} />
+          </div>
+        ) : (
+          <p className="col-span-2 row-start-3 rounded-lg bg-white p-4">
+            No emails added...
+          </p>
+        )}
+
+        <Button type="submit" className="row-start-4">
           Delete
         </Button>
       </form>

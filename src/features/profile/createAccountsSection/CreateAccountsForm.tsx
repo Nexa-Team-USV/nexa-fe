@@ -7,10 +7,29 @@ import Label from "../../../components/Label";
 import Input from "../../../components/Input";
 import Message from "../../../components/Message";
 import Button from "../../../components/Button";
-import { HiMiniPlus } from "react-icons/hi2";
+import Select from "../../../components/Select";
+import AccountsToCreateList from "./AccountsToCreateList";
+
+export type AccountToCreate = { id: number; email: string; role: string };
+
+const options = [
+  {
+    value: "admin",
+    text: "Admin",
+  },
+  {
+    value: "teacher",
+    text: "Teacher",
+  },
+  {
+    value: "student",
+    text: "Student",
+  },
+];
 
 const formSchema = z.object({
   email: z.string().min(2, "Error message example..."),
+  role: z.string(),
 });
 
 export default function CreateAccountsForm() {
@@ -18,68 +37,88 @@ export default function CreateAccountsForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      role: "admin",
     },
   });
-  const [accountsToCreate, setAccountsToCreate] = useState<
-    { id: number; email: string }[]
-  >([]);
+  const [accountsToCreate, setAccountsToCreate] = useState<AccountToCreate[]>(
+    [],
+  );
 
-  const { errors } = methods.formState;
+  const {
+    trigger,
+    getValues,
+    formState: { errors, isValid },
+  } = methods;
+
+  function handleAddEmail() {
+    trigger();
+
+    if (isValid) {
+      setAccountsToCreate((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          ...getValues(),
+        },
+      ]);
+    }
+  }
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
     console.log(data);
-    setAccountsToCreate((prev) => [
-      ...prev,
-      { id: prev.length + 1, email: data.email },
-    ]);
   };
 
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-x-16 gap-y-4"
+        className="grid grid-cols-2 gap-x-8 gap-y-4"
       >
         <div className="col-span-2 flex flex-col gap-1">
-          <Label htmlFor="email">Email</Label>
-          <div className="flex items-center gap-4">
-            <Input
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Enter your email..."
-            />
-            <Button
-              type="submit"
-              variant="empty"
-              className="rounded-full bg-primary p-1"
-            >
-              <HiMiniPlus className="stroke-1 text-2xl text-white" />
-            </Button>
-          </div>
+          <Label htmlFor="emailToCreate">Email</Label>
+          <Input
+            type="text"
+            name="email"
+            id="emailToCreate"
+            placeholder="Enter your email..."
+          />
           {errors.email && (
             <Message variant="error">{errors.email?.message}</Message>
           )}
         </div>
 
-        {accountsToCreate.length ? (
-          <ul className="col-span-2 row-start-2 rounded-lg bg-white p-4">
-            {accountsToCreate.map((account) => (
-              <li key={account.id}>
-                <span>{`${account.id}.) `}</span>
-                {account.email}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="col-span-2 row-start-2">No emails added...</p>
-        )}
+        <div className="row-start-2 flex flex-col gap-1">
+          <Label htmlFor="role">Role</Label>
+          <Select
+            id="role"
+            name="role"
+            defaultValue="admin"
+            options={options}
+          />
+        </div>
 
         <Button
           type="submit"
-          onClick={(e) => e.preventDefault()}
-          className="col-start-1 row-start-3"
+          onClick={(e) => {
+            e.preventDefault();
+            handleAddEmail();
+          }}
+          className="self-end"
         >
+          Add
+        </Button>
+
+        {accountsToCreate.length ? (
+          <div className="col-span-2 row-start-3">
+            <AccountsToCreateList accounts={accountsToCreate} />
+          </div>
+        ) : (
+          <p className="col-span-2 row-start-3 rounded-lg bg-white p-4">
+            No emails added...
+          </p>
+        )}
+
+        <Button type="submit" className="row-start-4">
           Create
         </Button>
       </form>
