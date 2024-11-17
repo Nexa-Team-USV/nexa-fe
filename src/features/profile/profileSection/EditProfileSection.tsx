@@ -1,20 +1,24 @@
+import ProfileSection from "../ProfileSection";
+import SectionTitle from "../SectionTitle";
+import SubSectionTitle from "../SubSectionTitle";
 import EditPasswordForm from "./EditPasswordForm";
 import EditProfileForm from "./EditProfileForm";
+import SubSectionContainer from "./SubSectionContainer";
 
 export default function EditProfileSection() {
   return (
-    <div className="space-y-4 rounded-lg bg-secondary p-6">
-      <h2 className="text-3xl font-bold">Profile</h2>
+    <ProfileSection>
+      <SectionTitle>Profile</SectionTitle>
       <div className="space-y-8">
-        <div className="space-y-2">
-          <h3 className="text-xl font-bold">Edit profile</h3>
+        <SubSectionContainer>
+          <SubSectionTitle>Edit profile</SubSectionTitle>
           <EditProfileForm />
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-xl font-bold">Change password</h3>
+        </SubSectionContainer>
+        <SubSectionContainer>
+          <SubSectionTitle>Change password</SubSectionTitle>
           <EditPasswordForm />
-        </div>
+        </SubSectionContainer>
       </div>
-    </div>
+    </ProfileSection>
   );
 }

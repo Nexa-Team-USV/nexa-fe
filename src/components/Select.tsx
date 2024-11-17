@@ -25,6 +25,7 @@ type Props = DetailedHTMLProps<
   HTMLSelectElement
 > &
   VariantProps<typeof selectVariants> & {
+    name: string;
     options: Option[];
   };
 
@@ -32,6 +33,7 @@ export default function Select({
   variant,
   className,
   options,
+  name,
   ...props
 }: Props) {
   const { register } = useFormContext();
@@ -39,7 +41,7 @@ export default function Select({
   return (
     <select
       {...props}
-      {...register("role")}
+      {...register(name)}
       className={twMerge(selectVariants({ variant, className }))}
     >
       {options.map(({ value, text }) => (

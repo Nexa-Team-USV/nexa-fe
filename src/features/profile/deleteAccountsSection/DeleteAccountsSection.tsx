@@ -1,10 +1,12 @@
+import ProfileSection from "../ProfileSection";
+import SectionTitle from "../SectionTitle";
 import DeleteAccountsForm from "./DeleteAccountsForm";
 
 export default function DeleteAccountsSection() {
   return (
-    <div className="space-y-4 rounded-lg bg-secondary p-6">
-      <h2 className="text-3xl font-bold">Delete accounts</h2>
+    <ProfileSection>
+      <SectionTitle>Delete accounts</SectionTitle>
       <DeleteAccountsForm />
-    </div>
+    </ProfileSection>
   );
 }

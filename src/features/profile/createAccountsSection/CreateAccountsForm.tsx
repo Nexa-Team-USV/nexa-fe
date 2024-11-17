@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -9,6 +9,7 @@ import Message from "../../../components/Message";
 import Button from "../../../components/Button";
 import Select from "../../../components/Select";
 import AccountsToCreateList from "./AccountsToCreateList";
+import NoEmailsMessage from "../NoEmailsMessage";
 
 export type AccountToCreate = { id: number; email: string; role: string };
 
@@ -44,37 +45,34 @@ export default function CreateAccountsForm() {
     [],
   );
 
-  const {
-    trigger,
-    getValues,
-    formState: { errors, isValid },
-  } = methods;
+  const { errors } = methods.formState;
 
-  function handleAddEmail() {
-    trigger();
-
-    if (isValid) {
-      setAccountsToCreate((prev) => [
-        ...prev,
-        {
-          id: prev.length + 1,
-          ...getValues(),
-        },
-      ]);
-    }
+  function handleCreateAccounts(e: FormEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    console.log(accountsToCreate);
   }
 
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
-    console.log(data);
+  function handleDeleteAccount(id: number) {
+    setAccountsToCreate((prev) => prev.filter((account) => account.id !== id));
+  }
+
+  const onAddAccount: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
+    setAccountsToCreate((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        ...data,
+      },
+    ]);
   };
 
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-x-8 gap-y-4"
+        onSubmit={methods.handleSubmit(onAddAccount)}
+        className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2"
       >
-        <div className="col-span-2 flex flex-col gap-1">
+        <div className="flex flex-col gap-1 sm:col-span-2">
           <Label htmlFor="emailToCreate">Email</Label>
           <Input
             type="text"
@@ -87,7 +85,7 @@ export default function CreateAccountsForm() {
           )}
         </div>
 
-        <div className="row-start-2 flex flex-col gap-1">
+        <div className="flex flex-col gap-1 sm:row-start-2">
           <Label htmlFor="role">Role</Label>
           <Select
             id="role"
@@ -97,28 +95,26 @@ export default function CreateAccountsForm() {
           />
         </div>
 
-        <Button
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddEmail();
-          }}
-          className="self-end"
-        >
+        <Button type="submit" className="sm:self-end">
           Add
         </Button>
 
         {accountsToCreate.length ? (
-          <div className="col-span-2 row-start-3">
-            <AccountsToCreateList accounts={accountsToCreate} />
+          <div className="sm:col-span-2 sm:row-start-3">
+            <AccountsToCreateList
+              accounts={accountsToCreate}
+              onDeleteAccount={handleDeleteAccount}
+            />
           </div>
         ) : (
-          <p className="col-span-2 row-start-3 rounded-lg bg-white p-4">
-            No emails added...
-          </p>
+          <NoEmailsMessage />
         )}
 
-        <Button type="submit" className="row-start-4">
+        <Button
+          onClick={handleCreateAccounts}
+          type="submit"
+          className="sm:row-start-4"
+        >
           Create
         </Button>
       </form>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -8,6 +8,7 @@ import Input from "../../../components/Input";
 import Message from "../../../components/Message";
 import Button from "../../../components/Button";
 import AccountsToDeleteList from "./AccountsToDeleteList";
+import NoEmailsMessage from "../NoEmailsMessage";
 
 export type AccountToDelete = { id: number; email: string };
 
@@ -26,37 +27,34 @@ export default function DeleteAccountsForm() {
     [],
   );
 
-  const {
-    trigger,
-    getValues,
-    formState: { errors, isValid },
-  } = methods;
+  const { errors } = methods.formState;
 
-  function handleAddEmail() {
-    trigger();
-
-    if (isValid) {
-      setAccountsToDelete((prev) => [
-        ...prev,
-        {
-          id: prev.length + 1,
-          ...getValues(),
-        },
-      ]);
-    }
+  function handleDeleteAccounts(e: FormEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    console.log(accountsToDelete);
   }
 
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
-    console.log(data);
+  function handleDeleteAccount(id: number) {
+    setAccountsToDelete((prev) => prev.filter((account) => account.id !== id));
+  }
+
+  const onAddAccount: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
+    setAccountsToDelete((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        ...data,
+      },
+    ]);
   };
 
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-x-16 gap-y-4"
+        onSubmit={methods.handleSubmit(onAddAccount)}
+        className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2"
       >
-        <div className="col-span-2 flex flex-col gap-1">
+        <div className="flex flex-col gap-1 sm:col-span-2">
           <Label htmlFor="emailToDelete">Email</Label>
           <Input
             type="text"
@@ -69,28 +67,26 @@ export default function DeleteAccountsForm() {
           )}
         </div>
 
-        <Button
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddEmail();
-          }}
-          className="row-start-2"
-        >
+        <Button type="submit" className="sm:row-start-2">
           Add
         </Button>
 
         {accountsToDelete.length ? (
-          <div className="col-span-2 row-start-3">
-            <AccountsToDeleteList accounts={accountsToDelete} />
+          <div className="sm:col-span-2 sm:row-start-3">
+            <AccountsToDeleteList
+              accounts={accountsToDelete}
+              onDeleteAccount={handleDeleteAccount}
+            />
           </div>
         ) : (
-          <p className="col-span-2 row-start-3 rounded-lg bg-white p-4">
-            No emails added...
-          </p>
+          <NoEmailsMessage />
         )}
 
-        <Button type="submit" className="row-start-4">
+        <Button
+          type="submit"
+          onClick={handleDeleteAccounts}
+          className="sm:row-start-4"
+        >
           Delete
         </Button>
       </form>

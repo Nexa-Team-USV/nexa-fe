@@ -47,7 +47,7 @@ export default function EditPasswordForm() {
   return (
     <FormProvider {...methods}>
       <form
-        className="grid grid-cols-2 gap-x-16 gap-y-4"
+        className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         {inputs.map(({ label, ...input }) => (
