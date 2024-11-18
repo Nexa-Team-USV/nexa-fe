@@ -4,12 +4,10 @@ import EditProfileSection from "../features/profile/profileSection/EditProfileSe
 
 export default function ProfilePage() {
   return (
-    <div className="p-4 sm:px-8 sm:py-16">
-      <div className="m-auto max-w-screen-lg space-y-8 sm:space-y-16">
-        <EditProfileSection />
-        <CreateAccountsSection />
-        <DeleteAccountsSection />
-      </div>
+    <div className="space-y-8 sm:space-y-16">
+      <EditProfileSection />
+      <CreateAccountsSection />
+      <DeleteAccountsSection />
     </div>
   );
 }
