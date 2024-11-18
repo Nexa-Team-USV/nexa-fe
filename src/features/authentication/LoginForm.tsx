@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
@@ -47,9 +47,9 @@ export default function LoginForm() {
 
   console.log(errors);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
+    console.log(data);
+  };
 
   return (
     <FormProvider {...methods}>

@@ -8,7 +8,7 @@ const inputVariants = cva("outline-none", {
   variants: {
     variant: {
       primary:
-        "border-primary border-2 py-1 px-2 rounded-lg placeholder:text-sm",
+        "border-primary border-2 py-1 px-2 rounded-lg placeholder:text-sm disabled:bg-secondary-disabled",
     },
     size: {
       full: "w-full",
