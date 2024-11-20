@@ -15,7 +15,7 @@ export default function ScheduleButton() {
         variant="secondary"
         className="hidden px-4 sm:inline-block"
       >
-        <span>Schedule</span>
+        Schedule
       </Button>
       <Button
         onClick={() => setIsOpen(true)}

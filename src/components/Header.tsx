@@ -14,7 +14,7 @@ export default function Header() {
       <ScheduleButton />
       <NotificationsButton />
       <ProfileBadge />
-      <SidebarButton />
+      {/* <SidebarButton /> */}
     </header>
   );
 }

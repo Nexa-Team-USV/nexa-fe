@@ -30,7 +30,7 @@ const options = [
 
 const formSchema = z.object({
   email: z.string().min(2, "Error message example..."),
-  role: z.string(),
+  role: z.string().min(2, "Error message example..."),
 });
 
 export default function CreateAccountsForm() {
@@ -38,7 +38,7 @@ export default function CreateAccountsForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      role: "admin",
+      role: "",
     },
   });
   const [accountsToCreate, setAccountsToCreate] = useState<AccountToCreate[]>(
@@ -90,9 +90,12 @@ export default function CreateAccountsForm() {
           <Select
             id="role"
             name="role"
-            defaultValue="admin"
+            placeholder="Select role"
             options={options}
           />
+          {errors.role && (
+            <Message variant="error">{errors.role?.message}</Message>
+          )}
         </div>
 
         <Button type="submit" className="sm:self-end">

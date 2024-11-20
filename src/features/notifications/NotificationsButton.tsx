@@ -20,7 +20,7 @@ export default function NotificationsButton() {
         </div>
       </Button>
       {isOpen && (
-        <div className="absolute right-0 top-full">
+        <div className="absolute right-0 top-full z-10">
           <Notifications />
         </div>
       )}

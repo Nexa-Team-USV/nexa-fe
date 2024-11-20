@@ -38,7 +38,9 @@ export default function Sidebar({ isOpen, setIsOpen }: Props) {
         <div className="h-9 w-9 rounded-full bg-primary"></div>
         <div className="font-medium">Tonu Cristian</div>
       </div>
-      <Link to="/profile">Profile</Link>
+      <Link to="/profile" onClick={() => setIsOpen(false)}>
+        Profile
+      </Link>
       <Button>Log out</Button>
     </div>
   );
