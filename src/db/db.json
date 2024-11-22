@@ -1,0 +1,54 @@
+{
+  "schedules": [
+    {
+      "id": 1,
+      "title": "Ingineria programelor",
+      "type": "exam",
+      "description": "Lorem ipsum dolor sit amet.",
+      "date": "10/21/2024",
+      "startTime": "2024-11-21T09:00:00.434Z",
+      "endTime": "2024-11-21T10:00:00.434Z",
+      "teacher_id": 2
+    },
+    {
+      "id": 2,
+      "title": "Baze de date",
+      "type": "exam",
+      "description": "Lorem ipsum dolor sit amet.",
+      "date": "10/24/2024",
+      "startTime": "2024-10-24T19:59:51.434Z",
+      "endTime": "2024-11-21T19:59:51.434Z",
+      "teacher_id": 3
+    },
+    {
+      "id": 3,
+      "title": "PCLP",
+      "type": "exam",
+      "description": "Lorem ipsum dolor sit amet.",
+      "date": "11/5/2024",
+      "startTime": "2024-11-21T19:59:51.434Z",
+      "endTime": "2024-11-21T19:59:51.434Z",
+      "teacher_id": 1
+    },
+    {
+      "id": 4,
+      "title": "CMo",
+      "type": "exam",
+      "description": "Lorem ipsum dolor sit amet.",
+      "date": "10/7/2024",
+      "startTime": "2024-11-21T19:59:51.434Z",
+      "endTime": "2024-11-21T19:59:51.434Z",
+      "teacher_id": 7
+    },
+    {
+      "id": 5,
+      "title": "PrT",
+      "type": "exam",
+      "description": "Lorem ipsum dolor sit amet.",
+      "date": "11/11/2024",
+      "startTime": "2024-11-21T19:59:51.434Z",
+      "endTime": "2024-11-21T19:59:51.434Z",
+      "teacher_id": 3
+    }
+  ]
+}

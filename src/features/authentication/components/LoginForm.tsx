@@ -3,11 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import { Link } from "react-router-dom";
-import Input from "../../components/Input";
-import Label from "../../components/Label";
-import Checkbox from "../../components/Checkbox";
-import Button from "../../components/Button";
-import Message from "../../components/Message";
+import Input from "../../../components/Input";
+import Label from "../../../components/Label";
+import Checkbox from "../../../components/Checkbox";
+import Button from "../../../components/Button";
+import Message from "../../../components/Message";
 
 const inputs = [
   {

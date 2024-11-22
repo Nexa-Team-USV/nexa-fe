@@ -8,6 +8,7 @@ import App from "./App.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
+import ExamsCalendar from "./features/calendar/components/ExamsCalendar.tsx";
 
 const router = createBrowserRouter(
   [
@@ -16,8 +17,18 @@ const router = createBrowserRouter(
       element: <App />,
       children: [
         {
-          index: true,
+          path: "/",
           element: <HomePage />,
+          children: [
+            {
+              index: true,
+              element: <ExamsCalendar />,
+            },
+            {
+              path: "/tests",
+              element: <div>tests</div>,
+            },
+          ],
         },
         {
           path: "/login",

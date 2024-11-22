@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import Button from "../../components/Button";
-import ScheduleForm from "./ScheduleForm";
-import Overlay from "../../components/Overlay";
+import Button from "../../../components/Button";
+import Overlay from "../../../components/Overlay";
 import { HiMiniPlus, HiMiniXMark } from "react-icons/hi2";
+import ScheduleForm from "./ScheduleForm";
 
 export default function ScheduleButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -15,7 +15,7 @@ export default function ScheduleButton() {
         variant="secondary"
         className="hidden px-4 sm:inline-block"
       >
-        <span>Schedule</span>
+        Schedule
       </Button>
       <Button
         onClick={() => setIsOpen(true)}

@@ -6,8 +6,10 @@ export default function App() {
     <div>
       <Header />
 
-      <main>
-        <Outlet />
+      <main className="p-4 sm:px-8 sm:py-16">
+        <div className="m-auto max-w-screen-lg">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

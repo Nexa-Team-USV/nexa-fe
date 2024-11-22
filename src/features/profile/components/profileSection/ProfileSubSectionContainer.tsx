@@ -4,6 +4,6 @@ type Props = {
   children: ReactNode;
 };
 
-export default function SubSectionContainer({ children }: Props) {
+export default function ProfileSubSectionContainer({ children }: Props) {
   return <div className="space-y-2">{children}</div>;
 }

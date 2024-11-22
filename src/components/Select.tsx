@@ -1,5 +1,5 @@
-import { cva, VariantProps } from "class-variance-authority";
 import { DetailedHTMLProps, SelectHTMLAttributes } from "react";
+import { cva, VariantProps } from "class-variance-authority";
 import { useFormContext } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 
@@ -26,6 +26,7 @@ type Props = DetailedHTMLProps<
 > &
   VariantProps<typeof selectVariants> & {
     name: string;
+    placeholder?: string;
     options: Option[];
   };
 
@@ -34,16 +35,22 @@ export default function Select({
   className,
   options,
   name,
+  placeholder,
   ...props
 }: Props) {
   const { register } = useFormContext();
 
   return (
     <select
-      {...props}
       {...register(name)}
+      {...props}
       className={twMerge(selectVariants({ variant, className }))}
     >
+      {placeholder && (
+        <option value="" disabled hidden>
+          {placeholder}
+        </option>
+      )}
       {options.map(({ value, text }) => (
         <option key={value} value={value}>
           {text}

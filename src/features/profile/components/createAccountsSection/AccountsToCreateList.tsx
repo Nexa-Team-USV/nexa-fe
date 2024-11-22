@@ -1,5 +1,5 @@
 import { AccountToCreate } from "./CreateAccountsForm";
-import Button from "../../../components/Button";
+import Button from "../../../../components/Button";
 import { HiMiniXMark } from "react-icons/hi2";
 
 type Props = {

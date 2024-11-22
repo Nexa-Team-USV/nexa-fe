@@ -1,6 +1,6 @@
 import Logo from "../components/Logo";
-import CalendarLink from "../features/authentication/CalendarLink";
-import LoginForm from "../features/authentication/LoginForm";
+import CalendarLink from "../features/authentication/components/CalendarLink";
+import LoginForm from "../features/authentication/components/LoginForm";
 
 export default function LoginPage() {
   return (

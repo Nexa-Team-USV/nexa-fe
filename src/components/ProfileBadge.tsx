@@ -24,7 +24,7 @@ export default function ProfileBadge() {
       </Button>
 
       {isOpen && (
-        <ul className="absolute left-0 top-full w-full rounded-lg border-2 border-primary bg-white p-2">
+        <ul className="absolute left-0 top-full w-full rounded-lg border-2 border-primary bg-white p-2 shadow-xl">
           <li className="w-full rounded-lg transition-colors hover:bg-secondary">
             <Link to="/profile" className="inline-block w-full p-2">
               Profile
