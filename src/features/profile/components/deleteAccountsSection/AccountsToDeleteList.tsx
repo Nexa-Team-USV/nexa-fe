@@ -1,6 +1,6 @@
 import { HiMiniXMark } from "react-icons/hi2";
-import Button from "../../../components/Button";
 import { AccountToDelete } from "./DeleteAccountsForm";
+import Button from "../../../../components/Button";
 
 type Props = {
   accounts: AccountToDelete[];

@@ -2,9 +2,9 @@ import { useRef, useState } from "react";
 
 import { HiMiniBell } from "react-icons/hi2";
 import Notifications from "./Notifications";
-import Button from "../../components/Button";
+import Button from "../../../components/Button";
 
-import { useClickOutside } from "../../hooks/useClickOutside";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 export default function NotificationsButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);

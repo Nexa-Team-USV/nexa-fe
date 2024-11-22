@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
-import Button from "../../../components/Button";
-import { twMerge } from "tailwind-merge";
-import { useClickOutside } from "../../../hooks/useClickOutside";
+import Button from "../../../../components/Button";
+
+import { useClickOutside } from "../../../../hooks/useClickOutside";
 
 export default function SchedulingCardDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -29,7 +30,7 @@ export default function SchedulingCardDropdown() {
       </Button>
 
       {isOpen && (
-        <ul className="absolute right-full top-0 z-10 mr-0.5 w-36 -translate-y-full rounded-lg border-2 border-primary bg-white p-2 xsm:top-full xsm:translate-y-0">
+        <ul className="absolute right-full top-0 z-10 mr-0.5 w-36 -translate-y-full rounded-lg border-2 border-primary bg-white p-2 shadow-xl xsm:top-full xsm:translate-y-0">
           <li>
             <Button
               variant="empty"

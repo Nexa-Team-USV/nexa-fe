@@ -1,6 +1,6 @@
-import CreateAccountsSection from "../features/profile/createAccountsSection/CreateAccountsSection";
-import DeleteAccountsSection from "../features/profile/deleteAccountsSection/DeleteAccountsSection";
-import EditProfileSection from "../features/profile/profileSection/EditProfileSection";
+import CreateAccountsSection from "../features/profile/components/createAccountsSection/CreateAccountsSection";
+import DeleteAccountsSection from "../features/profile/components/deleteAccountsSection/DeleteAccountsSection";
+import EditProfileSection from "../features/profile/components/profileSection/EditProfileSection";
 
 export default function ProfilePage() {
   return (

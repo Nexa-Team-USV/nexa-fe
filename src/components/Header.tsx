@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import NotificationsButton from "../features/notifications/NotificationsButton";
-import ScheduleButton from "../features/scheduling/ScheduleButton";
+import ScheduleButton from "../features/scheduling/components/ScheduleButton";
 import Logo from "./Logo";
 import ProfileBadge from "./ProfileBadge";
-import SidebarButton from "./SidebarButton";
+import NotificationsButton from "../features/notifications/components/NotificationsButton";
 
 export default function Header() {
   return (

@@ -3,12 +3,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import Label from "../../../components/Label";
-import Input from "../../../components/Input";
-import Message from "../../../components/Message";
-import Button from "../../../components/Button";
 import AccountsToDeleteList from "./AccountsToDeleteList";
 import NoEmailsMessage from "../NoEmailsMessage";
+import Label from "../../../../components/Label";
+import Input from "../../../../components/Input";
+import Message from "../../../../components/Message";
+import Button from "../../../../components/Button";
 
 export type AccountToDelete = { id: number; email: string };
 

@@ -8,7 +8,7 @@ import App from "./App.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
-import ExamsCalendar from "./features/calendar/ExamsCalendar.tsx";
+import ExamsCalendar from "./features/calendar/components/ExamsCalendar.tsx";
 
 const router = createBrowserRouter(
   [

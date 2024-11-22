@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { FormProvider, useForm } from "react-hook-form";
-import Label from "../../components/Label";
-import Select from "../../components/Select";
-import { useSearchParams } from "react-router-dom";
-import Button from "../../components/Button";
+import Label from "../../../components/Label";
+import Select from "../../../components/Select";
+import Button from "../../../components/Button";
 
 const specializationOptions = [
   {
