@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
 import { Link } from "react-router-dom";
-import ScheduleButton from "../features/scheduling/components/ScheduleButton";
-import Logo from "./Logo";
+import Logo from "../Logo";
+import ScheduleButton from "../../features/scheduling/components/ScheduleButton";
+import NotificationsButton from "../../features/notifications/components/NotificationsButton";
 import ProfileBadge from "./ProfileBadge";
-import NotificationsButton from "../features/notifications/components/NotificationsButton";
 import SidebarButton from "./SidebarButton";
 
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Header() {
   const { isLogged } = useContext(AuthContext);
@@ -22,6 +22,7 @@ export default function Header() {
           <ScheduleButton />
           <NotificationsButton />
           <ProfileBadge />
+          <SidebarButton />
         </>
       ) : (
         <Link
@@ -31,7 +32,6 @@ export default function Header() {
           Login
         </Link>
       )}
-      <SidebarButton />
     </header>
   );
 }

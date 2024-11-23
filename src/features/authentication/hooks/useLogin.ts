@@ -3,14 +3,14 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { AuthApi } from "../../../api/AuthApi";
 
 export function useLogin() {
-  const { setToken, setIsLogged, setIsLoading, setError } =
+  const { isLoading, error, setToken, setIsLogged, setIsLoading, setError } =
     useContext(AuthContext);
 
   function login(userCredentials: { email: string; password: string }) {
     setIsLoading(true);
     AuthApi.login(userCredentials)
       .then((res) => {
-        const token = res;
+        const token = res.token;
         localStorage.setItem("token", token);
         setToken(token);
         setIsLogged(true);
@@ -19,5 +19,5 @@ export function useLogin() {
       .finally(() => setIsLoading(false));
   }
 
-  return { login };
+  return { login, isLoading, error };
 }

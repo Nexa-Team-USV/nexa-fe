@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 
 import { HiMiniBars3 } from "react-icons/hi2";
 import Sidebar from "./Sidebar";
-import Button from "./Button";
+import Button from "../Button";
 
 export default function SidebarButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);

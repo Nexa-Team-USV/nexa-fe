@@ -8,6 +8,6 @@ export const AuthApi = {
   login(userCredentials: Login) {
     return api
       .post(`${URL}/login`, userCredentials)
-      .then(({ data }: AxiosResponse<string>) => data);
+      .then(({ data }: AxiosResponse<{ token: string }>) => data);
   },
 };

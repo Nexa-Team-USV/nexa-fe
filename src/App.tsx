@@ -12,30 +12,25 @@ export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (
-      !isLogged &&
-      !(
-        location.pathname === "/forgotPassword" ||
-        location.pathname === "/resetPassword" ||
-        location.pathname === "/" ||
-        location.pathname === "/tests"
-      )
-    ) {
-      navigate("/login");
-    }
-  }, [location.pathname, navigate, isLogged]);
+  const checkAuthPaths =
+    location.pathname === "/forgotPassword" ||
+    location.pathname === "/resetPassword" ||
+    location.pathname === "/" ||
+    location.pathname === "/tests" ||
+    location.pathname === "/login";
 
-  if (
-    !isLogged &&
-    !(
-      location.pathname === "/forgotPassword" ||
-      location.pathname === "/resetPassword" ||
-      location.pathname === "/" ||
-      location.pathname === "/tests" ||
-      location.pathname === "/login"
-    )
-  ) {
+  const checkAppPaths =
+    location.pathname === "/forgotPassword" ||
+    location.pathname === "/resetPassword" ||
+    location.pathname === "/login";
+
+  useEffect(() => {
+    if ((!isLogged && !checkAuthPaths) || (isLogged && checkAppPaths)) {
+      navigate("/");
+    }
+  }, [location.pathname, navigate, isLogged, checkAuthPaths, checkAppPaths]);
+
+  if ((!isLogged && !checkAuthPaths) || (isLogged && checkAppPaths)) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader />

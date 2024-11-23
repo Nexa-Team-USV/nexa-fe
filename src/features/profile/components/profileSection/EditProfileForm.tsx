@@ -3,7 +3,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Label from "../../../../components/Label";
-import Input from "../../../../components/Input";
+import Input from "../../../../components/input/Input";
 import Message from "../../../../components/Message";
 import Button from "../../../../components/Button";
 

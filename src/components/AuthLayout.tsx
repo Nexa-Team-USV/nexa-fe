@@ -1,28 +1,8 @@
-import { useContext, useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router";
-
-import Header from "./Header";
-
-import { AuthContext } from "../contexts/AuthContext";
+import { Outlet, useLocation } from "react-router";
+import Header from "./header/Header";
 
 export default function AuthLayout() {
-  const { isLogged } = useContext(AuthContext);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (
-      !isLogged &&
-      !(
-        location.pathname === "/forgotPassword" ||
-        location.pathname === "/resetPassword" ||
-        location.pathname === "/" ||
-        location.pathname === "/tests"
-      )
-    ) {
-      navigate("/login");
-    }
-  }, [location.pathname, navigate, isLogged]);
 
   if (location.pathname === "/" || location.pathname === "/tests") {
     return (
