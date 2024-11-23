@@ -1,6 +1,5 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 
 import { Link } from "react-router-dom";
 import Input from "../../../components/Input";
@@ -8,6 +7,10 @@ import Label from "../../../components/Label";
 import Checkbox from "../../../components/Checkbox";
 import Button from "../../../components/Button";
 import Message from "../../../components/Message";
+
+import { loginSchema } from "../../../schemas/login.schema";
+import { Login } from "../../../types/user.type";
+import { useLogin } from "../hooks/useLogin";
 
 const inputs = [
   {
@@ -26,18 +29,10 @@ const inputs = [
   },
 ] as const;
 
-const formSchema = z.object({
-  email: z.string().min(2, {
-    message: "Email must be at least 2 characters.",
-  }),
-  password: z.string().min(2, {
-    message: "Password must be at least 2 characters.",
-  }),
-});
-
 export default function LoginForm() {
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { login } = useLogin();
+  const methods = useForm<Login>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -45,11 +40,7 @@ export default function LoginForm() {
   });
   const { errors } = methods.formState;
 
-  console.log(errors);
-
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
-    console.log(data);
-  };
+  const onSubmit: SubmitHandler<Login> = (data) => login(data);
 
   return (
     <FormProvider {...methods}>

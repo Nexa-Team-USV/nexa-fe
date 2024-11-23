@@ -5,10 +5,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import App from "./App.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import ExamsCalendar from "./features/calendar/components/ExamsCalendar.tsx";
+
+import AuthProvider from "./contexts/AuthContext.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 
 const router = createBrowserRouter(
   [
@@ -31,12 +33,20 @@ const router = createBrowserRouter(
           ],
         },
         {
+          path: "/profile",
+          element: <ProfilePage />,
+        },
+        {
           path: "/login",
           element: <LoginPage />,
         },
         {
-          path: "/profile",
-          element: <ProfilePage />,
+          path: "/forgotPassword",
+          element: <div>Forgot password</div>,
+        },
+        {
+          path: "/resetPassword",
+          element: <div>Reset password</div>,
         },
       ],
     },
@@ -54,11 +64,13 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider
-      router={router}
-      future={{
-        v7_startTransition: true,
-      }}
-    />
+    <AuthProvider>
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
+    </AuthProvider>
   </StrictMode>,
 );
