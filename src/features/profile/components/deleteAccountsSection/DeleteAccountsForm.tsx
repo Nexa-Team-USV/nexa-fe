@@ -6,7 +6,7 @@ import { z } from "zod";
 import AccountsToDeleteList from "./AccountsToDeleteList";
 import NoEmailsMessage from "../NoEmailsMessage";
 import Label from "../../../../components/Label";
-import Input from "../../../../components/Input";
+import Input from "../../../../components/input/Input";
 import Message from "../../../../components/Message";
 import Button from "../../../../components/Button";
 

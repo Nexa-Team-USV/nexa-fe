@@ -3,7 +3,9 @@ import { twMerge } from "tailwind-merge";
 
 import { HiMiniXMark } from "react-icons/hi2";
 import { Link } from "react-router-dom";
-import Button from "./Button";
+import Button from "../Button";
+
+import { useLogout } from "../../features/authentication/hooks/useLogout";
 
 type Props = {
   isOpen: boolean;
@@ -11,6 +13,8 @@ type Props = {
 };
 
 export default function Sidebar({ isOpen, setIsOpen }: Props) {
+  const { logout } = useLogout();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -41,7 +45,7 @@ export default function Sidebar({ isOpen, setIsOpen }: Props) {
       <Link to="/profile" onClick={() => setIsOpen(false)}>
         Profile
       </Link>
-      <Button>Log out</Button>
+      <Button onClick={logout}>Log out</Button>
     </div>
   );
 }
