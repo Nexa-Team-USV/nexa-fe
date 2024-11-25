@@ -29,6 +29,7 @@ export default function InputIcon({
     <span
       onClick={onClick}
       className={twMerge(
+        "select-none",
         inputIconVariants({ variant, className }),
         onClick && "cursor-pointer",
       )}
