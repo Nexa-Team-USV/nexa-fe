@@ -1,30 +1,28 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
 
 import Label from "../../../../components/Label";
 import Input from "../../../../components/input/Input";
 import Message from "../../../../components/Message";
 import Button from "../../../../components/Button";
 
-import { emailSchema } from "../../../../schemas/email.schema";
+import { useDeleteAccount } from "../../hooks/useDeleteAccount";
+import { DeleteAccount } from "../../../../types/user.type";
+import { deleteAccountSchema } from "../../../../schemas/deleteAccount.schema";
 
-const formSchema = z.object({
-  email: emailSchema,
-});
-
-export default function DeleteAccountsForm() {
-  const methods = useForm({
-    resolver: zodResolver(formSchema),
+export default function DeleteAccountForm() {
+  const methods = useForm<DeleteAccount>({
+    resolver: zodResolver(deleteAccountSchema),
     defaultValues: {
       email: "",
     },
   });
+  const { deleteAccount, message, isLoading, error } = useDeleteAccount();
 
   const { errors } = methods.formState;
 
-  const onAddAccount: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
-    console.log(data);
+  const onAddAccount: SubmitHandler<DeleteAccount> = (data) => {
+    deleteAccount(data.email);
   };
 
   return (
@@ -46,9 +44,17 @@ export default function DeleteAccountsForm() {
           )}
         </div>
 
-        <Button type="submit" className="sm:row-start-2">
+        <Button type="submit" disabled={isLoading} className="sm:row-start-2">
           Delete
         </Button>
+        {message && (
+          <Message className="text-center sm:row-start-3">{message}</Message>
+        )}
+        {error && (
+          <Message variant="error" className="text-center sm:row-start-3">
+            {error}
+          </Message>
+        )}
       </form>
     </FormProvider>
   );

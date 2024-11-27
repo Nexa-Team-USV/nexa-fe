@@ -19,19 +19,19 @@ const specializationOptions = [
 
 const groupOptions = [
   {
-    value: "3141a",
+    value: "c3141a",
     text: "C - 3141A",
   },
   {
-    value: "3141b",
+    value: "c3141b",
     text: "C - 3141B",
   },
   {
-    value: "3142a",
+    value: "c3142a",
     text: "C - 3142A",
   },
   {
-    value: "3142b",
+    value: "c3142b",
     text: "C - 3142B",
   },
 ];

@@ -11,7 +11,7 @@ const formSchema = z.object({
   username: z.string().min(2, "Username should be longer..."),
 });
 
-export default function EditProfileForm() {
+export default function ChangeProfileForm() {
   const methods = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

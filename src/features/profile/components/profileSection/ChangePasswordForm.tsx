@@ -1,10 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
 
 import Button from "../../../../components/Button";
 import HidePasswordInput from "../../../../components/input/HidePasswordInput";
-import { passwordSchema } from "../../../../schemas/password.schema";
+import Message from "../../../../components/Message";
+
+import { useChangePassword } from "../../hooks/useChangePassword";
+import { ChangePassword } from "../../../../types/user.type";
+import { changePasswordSchema } from "../../../../schemas/changePassword.schema";
 
 const inputs = [
   {
@@ -30,26 +33,28 @@ const inputs = [
   },
 ] as const;
 
-const formSchema = z.object({
-  oldPassword: passwordSchema,
-  newPassword: passwordSchema,
-  confirmNewPassword: passwordSchema,
-});
-
-export default function EditPasswordForm() {
-  const methods = useForm({
-    resolver: zodResolver(formSchema),
+export default function ChangePasswordForm() {
+  const methods = useForm<ChangePassword>({
+    resolver: zodResolver(changePasswordSchema),
     defaultValues: {
       oldPassword: "",
       newPassword: "",
       confirmNewPassword: "",
     },
   });
+  const { changePassword, message, isLoading, error, setMessage, setError } =
+    useChangePassword();
 
   const { errors } = methods.formState;
 
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<ChangePassword> = (data) => {
+    const { newPassword, confirmNewPassword } = data;
+    setMessage("");
+    setError("");
+    if (newPassword !== confirmNewPassword) {
+      return setError("New passwords don't match!");
+    }
+    changePassword(data);
   };
 
   return (
@@ -59,7 +64,7 @@ export default function EditPasswordForm() {
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         {inputs.map(({ id, name, placeholder, label, htmlFor }) => (
-          <div key={id} className="flex flex-col gap-1">
+          <div key={id} className="flex flex-col gap-1 self-start">
             <HidePasswordInput
               id={id}
               name={name}
@@ -70,9 +75,17 @@ export default function EditPasswordForm() {
             />
           </div>
         ))}
-        <Button type="submit" className="sm:row-start-3">
+        <Button type="submit" disabled={isLoading} className="sm:row-start-3">
           Save
         </Button>
+        {message && (
+          <Message className="text-center sm:row-start-4">{message}</Message>
+        )}
+        {error && (
+          <Message variant="error" className="text-center sm:row-start-4">
+            {error}
+          </Message>
+        )}
       </form>
     </FormProvider>
   );
