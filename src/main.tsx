@@ -8,9 +8,10 @@ import App from "./App.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import ExamsCalendar from "./features/calendar/components/ExamsCalendar.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 
 import AuthProvider from "./contexts/AuthContext.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
+import UserProvider from "./contexts/UserContext.tsx";
 
 const router = createBrowserRouter(
   [
@@ -65,12 +66,14 @@ const router = createBrowserRouter(
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider
-        router={router}
-        future={{
-          v7_startTransition: true,
-        }}
-      />
+      <UserProvider>
+        <RouterProvider
+          router={router}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
+      </UserProvider>
     </AuthProvider>
   </StrictMode>,
 );

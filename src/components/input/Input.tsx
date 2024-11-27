@@ -8,7 +8,7 @@ import InputIcon from "./InputIcon";
 const containerVariants = cva("flex items-center", {
   variants: {
     variant: {
-      primary: "border-primary border-2 rounded-lg overflow-hidden",
+      primary: "border-primary border-2 rounded-lg overflow-hidden bg-white",
     },
     size: {
       full: "w-full",

@@ -36,7 +36,14 @@ export default function LoginForm() {
             <Message variant="error">{errors.email.message}</Message>
           )}
         </div>
-        <HidePasswordInput error={errors.password?.message} />
+        <HidePasswordInput
+          label="Password"
+          htmlFor="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password..."
+          error={errors.password?.message}
+        />
 
         <div className="flex flex-col items-center justify-between gap-1 xsm:flex-row">
           <div className="flex items-center gap-1">

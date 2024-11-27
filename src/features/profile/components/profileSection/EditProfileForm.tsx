@@ -27,7 +27,7 @@ export default function EditProfileForm() {
   return (
     <FormProvider {...methods}>
       <form
-        className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <div className="flex flex-col gap-1">
@@ -42,7 +42,7 @@ export default function EditProfileForm() {
             <Message variant="error">{errors.username?.message}</Message>
           )}
         </div>
-        <Button type="submit" className="sm:col-start-1 sm:row-start-2">
+        <Button type="submit" className="sm:row-start-2">
           Save
         </Button>
       </form>

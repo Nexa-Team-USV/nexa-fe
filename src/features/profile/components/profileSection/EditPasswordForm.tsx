@@ -2,39 +2,47 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import Label from "../../../../components/Label";
-import Input from "../../../../components/input/Input";
-import Message from "../../../../components/Message";
 import Button from "../../../../components/Button";
+import HidePasswordInput from "../../../../components/input/HidePasswordInput";
+import { passwordSchema } from "../../../../schemas/password.schema";
 
 const inputs = [
   {
-    id: "repeatPassword",
-    type: "password",
-    name: "repeatPassword",
+    id: "newPassword",
+    name: "newPassword",
     placeholder: "New password...",
     label: "New password",
+    htmlFor: "newPassword",
   },
   {
-    id: "repeatNewPassword",
-    type: "password",
-    name: "repeatNewPassword",
-    placeholder: "Repeat new password...",
-    label: "Repeat new password",
+    id: "confirmNewPassword",
+    name: "confirmNewPassword",
+    placeholder: "Confirm new password...",
+    label: "Confirm new password",
+    htmlFor: "confirmNewPassword",
+  },
+  {
+    id: "oldPassword",
+    name: "oldPassword",
+    placeholder: "Old password...",
+    label: "Old password",
+    htmlFor: "oldPassword",
   },
 ] as const;
 
 const formSchema = z.object({
-  repeatPassword: z.string().min(2, "Error message example..."),
-  repeatNewPassword: z.string().min(2, "Error message example..."),
+  oldPassword: passwordSchema,
+  newPassword: passwordSchema,
+  confirmNewPassword: passwordSchema,
 });
 
 export default function EditPasswordForm() {
   const methods = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      repeatPassword: "",
-      repeatNewPassword: "",
+      oldPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
     },
   });
 
@@ -47,19 +55,24 @@ export default function EditPasswordForm() {
   return (
     <FormProvider {...methods}>
       <form
-        className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2"
+        className="grid grid-cols-1 items-center gap-4 sm:grid-cols-2"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
-        {inputs.map(({ label, ...input }) => (
-          <div key={input.id} className="flex flex-col gap-1">
-            <Label htmlFor={input.id}>{label}</Label>
-            <Input {...input} />
-            {errors[input.name] && (
-              <Message variant="error">{errors[input.name]?.message}</Message>
-            )}
+        {inputs.map(({ id, name, placeholder, label, htmlFor }) => (
+          <div key={id} className="flex flex-col gap-1">
+            <HidePasswordInput
+              id={id}
+              name={name}
+              label={label}
+              htmlFor={htmlFor}
+              placeholder={placeholder}
+              error={errors[name]?.message}
+            />
           </div>
         ))}
-        <Button type="submit">Save</Button>
+        <Button type="submit" className="sm:row-start-3">
+          Save
+        </Button>
       </form>
     </FormProvider>
   );
