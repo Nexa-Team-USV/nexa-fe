@@ -14,14 +14,19 @@ export const UserApi = {
       .get(`${URL}/current-user`)
       .then(({ data }: AxiosResponse<UserResponse>) => data);
   },
+  getUsers(role: string) {
+    return api
+      .get(`${URL}/${role}`)
+      .then(({ data }: AxiosResponse<UserResponse[]>) => data);
+  },
   createAccount(data: CreateAccount) {
     return api
       .post(`${URL}/create-account`, data)
       .then(({ data }: AxiosResponse<{ message: string }>) => data.message);
   },
-  deleteAccount(email: string) {
+  deleteAccount(id: string) {
     return api
-      .delete(`${URL}/remove-account`, { data: { email } })
+      .delete(`${URL}/remove-account/${id}`)
       .then(({ data }: AxiosResponse<{ message: string }>) => data.message);
   },
   changePassword(data: ChangePassword) {

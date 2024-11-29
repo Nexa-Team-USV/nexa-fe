@@ -6,9 +6,9 @@ export function useDeleteAccount() {
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string>("");
 
-  function deleteAccount(email: string) {
+  function deleteAccount(id: string) {
     setIsLoading(true);
-    UserApi.deleteAccount(email)
+    UserApi.deleteAccount(id)
       .then((res) => {
         setMessage("");
         setError("");
