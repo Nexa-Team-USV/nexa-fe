@@ -26,7 +26,7 @@ export default function ScheduleButton() {
       </Button>
 
       {isOpen && (
-        <Overlay className="absolute left-0 top-0">
+        <Overlay>
           <Button
             onClick={() => setIsOpen(false)}
             variant="empty"

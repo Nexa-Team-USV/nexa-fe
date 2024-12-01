@@ -56,13 +56,13 @@ const groupOptions = [
 ];
 
 type Props = {
-  isCreating: boolean;
+  isLoading: boolean;
   onCreateAccount: (data: CreateAccount) => void;
 };
 
 export default function CreateAccountForm({
   onCreateAccount,
-  isCreating,
+  isLoading,
 }: Props) {
   const methods = useForm<CreateAccount>({
     resolver: zodResolver(createAccountSchema),
@@ -144,7 +144,7 @@ export default function CreateAccountForm({
           </div>
         )}
 
-        <Button type="submit" disabled={isCreating}>
+        <Button type="submit" disabled={isLoading}>
           Create
         </Button>
       </form>
