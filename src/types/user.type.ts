@@ -5,7 +5,7 @@ import { createAccountSchema } from "../schemas/createAccount.schema";
 import { changePasswordSchema } from "../schemas/changePassword.schema";
 import { deleteAccountSchema } from "../schemas/deleteAccount.schema";
 
-export type Role = "student" | "teacher" | "admin" | "";
+export type Role = "student" | "teacher" | "admin";
 
 export type UserResponse = {
   _id: string;
@@ -23,7 +23,7 @@ export type User = {
   email: string;
   specialization: string;
   group: string;
-  role: Role;
+  role: Role | "";
   createdAt: string;
 };
 

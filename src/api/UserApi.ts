@@ -14,10 +14,13 @@ export const UserApi = {
       .get(`${URL}/current-user`)
       .then(({ data }: AxiosResponse<UserResponse>) => data);
   },
-  getUsers(role: string) {
+  getUsers(role: string, limit: number, offset: number) {
     return api
-      .get(`${URL}/${role}`)
-      .then(({ data }: AxiosResponse<UserResponse[]>) => data);
+      .get(`${URL}/${role}?limit=${limit}&offset=${offset}`)
+      .then(
+        ({ data }: AxiosResponse<{ users: UserResponse[]; pages: number }>) =>
+          data,
+      );
   },
   createAccount(data: CreateAccount) {
     return api
