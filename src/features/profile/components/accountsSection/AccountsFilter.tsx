@@ -3,6 +3,8 @@ import { twMerge } from "tailwind-merge";
 
 import Button from "../../../../components/Button";
 
+import { Role } from "../../../../types/user.type";
+
 const links = [
   {
     value: "",
@@ -16,11 +18,11 @@ const links = [
     value: "admin",
     text: "Admins",
   },
-];
+] as const;
 
 type Props = {
-  role: string;
-  setRole: Dispatch<SetStateAction<string>>;
+  role: Role;
+  setRole: Dispatch<SetStateAction<Role>>;
 };
 
 export default function AccountsFilter({ role, setRole }: Props) {

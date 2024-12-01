@@ -7,7 +7,6 @@ import Message from "../../../../components/Message";
 import Button from "../../../../components/Button";
 import Select from "../../../../components/Select";
 
-import { useCreateAccount } from "../../hooks/useCreateAccount";
 import { CreateAccount } from "../../../../types/user.type";
 import { createAccountSchema } from "../../../../schemas/createAccount.schema";
 
@@ -56,7 +55,15 @@ const groupOptions = [
   },
 ];
 
-export default function CreateAccountForm() {
+type Props = {
+  isCreating: boolean;
+  onCreateAccount: (data: CreateAccount) => void;
+};
+
+export default function CreateAccountForm({
+  onCreateAccount,
+  isCreating,
+}: Props) {
   const methods = useForm<CreateAccount>({
     resolver: zodResolver(createAccountSchema),
     defaultValues: {
@@ -66,14 +73,13 @@ export default function CreateAccountForm() {
       group: "",
     },
   });
-  const { createAccount, message, isLoading, error } = useCreateAccount();
 
   const { errors } = methods.formState;
 
   const isStudent = methods.watch("role") === "student";
 
   const onSubmit: SubmitHandler<CreateAccount> = (data) => {
-    createAccount(data);
+    onCreateAccount(data);
   };
 
   return (
@@ -91,7 +97,7 @@ export default function CreateAccountForm() {
             placeholder="Enter your email..."
           />
           {errors.email && (
-            <Message variant="error">{errors.email?.message}</Message>
+            <Message variant="error">{errors.email.message}</Message>
           )}
         </div>
 
@@ -104,7 +110,7 @@ export default function CreateAccountForm() {
             options={roleOptions}
           />
           {errors.role && (
-            <Message variant="error">{errors.role?.message}</Message>
+            <Message variant="error">{errors.role.message}</Message>
           )}
         </div>
 
@@ -118,9 +124,7 @@ export default function CreateAccountForm() {
               options={specializationOptions}
             />
             {errors.specialization && (
-              <Message variant="error">
-                {errors.specialization?.message}
-              </Message>
+              <Message variant="error">{errors.specialization.message}</Message>
             )}
           </div>
         )}
@@ -140,17 +144,9 @@ export default function CreateAccountForm() {
           </div>
         )}
 
-        <Button type="submit" disabled={isLoading}>
+        <Button type="submit" disabled={isCreating}>
           Create
         </Button>
-        {message && (
-          <Message className="text-center sm:row-start-4">{message}</Message>
-        )}
-        {error && (
-          <Message variant="error" className="text-center sm:row-start-4">
-            {error}
-          </Message>
-        )}
       </form>
     </FormProvider>
   );

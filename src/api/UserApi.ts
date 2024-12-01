@@ -22,12 +22,12 @@ export const UserApi = {
   createAccount(data: CreateAccount) {
     return api
       .post(`${URL}/create-account`, data)
-      .then(({ data }: AxiosResponse<{ message: string }>) => data.message);
+      .then(({ data }: AxiosResponse<{ user: UserResponse }>) => data.user);
   },
   deleteAccount(id: string) {
     return api
       .delete(`${URL}/remove-account/${id}`)
-      .then(({ data }: AxiosResponse<{ message: string }>) => data.message);
+      .then(({ data }: AxiosResponse<{ user: UserResponse }>) => data.user);
   },
   changePassword(data: ChangePassword) {
     return api

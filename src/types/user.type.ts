@@ -34,3 +34,9 @@ export type CreateAccount = z.infer<typeof createAccountSchema>;
 export type DeleteAccount = z.infer<typeof deleteAccountSchema>;
 
 export type ChangePassword = z.infer<typeof changePasswordSchema>;
+
+export type Users = {
+  student: User[];
+  teacher: User[];
+  admin: User[];
+};
