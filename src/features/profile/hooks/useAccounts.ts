@@ -32,7 +32,6 @@ export function useAccounts() {
         mappedUsers.forEach((user) => {
           newUsers[user.role].push(user);
         });
-        console.log(res.pages, res.users.length, PAGE_LIMIT, currentPage);
 
         setPages(res.pages);
         setCurrentPage((prev) =>
@@ -48,7 +47,6 @@ export function useAccounts() {
     setIsLoading(true);
     UserApi.createAccount(data)
       .then(() => {
-        console.log("Adaugat");
         handleFetchUsers();
       })
       .catch((error) => setCreatingError(error.response.data.message))
@@ -59,7 +57,6 @@ export function useAccounts() {
     setIsLoading(true);
     UserApi.deleteAccount(id)
       .then(() => {
-        console.log("Sters");
         handleFetchUsers();
       })
       .catch((error) => setDeletingError(error.response.data.message))
@@ -67,7 +64,6 @@ export function useAccounts() {
   }
 
   useEffect(() => {
-    console.log("Fetch");
     handleFetchUsers();
   }, [handleFetchUsers]);
 
