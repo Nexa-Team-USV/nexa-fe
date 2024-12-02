@@ -6,7 +6,7 @@ import Label from "../../../components/Label";
 import Select from "../../../components/Select";
 import Button from "../../../components/Button";
 
-const specializationOptions = [
+const studyTypeOptions = [
   {
     value: "licenta",
     text: "Licenta",
@@ -40,7 +40,7 @@ export default function CalendarFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const methods = useForm({
     defaultValues: {
-      specialization: searchParams.get("spec") || "",
+      studyType: searchParams.get("spec") || "",
       group: searchParams.get("group") || "",
     },
   });
@@ -62,19 +62,19 @@ export default function CalendarFilters() {
     searchParams.delete("group");
     setSearchParams(searchParams);
 
-    reset({ specialization: "", group: "" });
+    reset({ studyType: "", group: "" });
   }
 
   return (
     <FormProvider {...methods}>
       <form className="grid grid-cols-1 gap-2 xsm:grid-cols-2 xsm:gap-4 sm:grid-cols-3 sm:items-end sm:gap-x-4 md:grid-cols-4">
         <div className="flex flex-col gap-1">
-          <Label htmlFor="specialization">Specialization</Label>
+          <Label htmlFor="studyType">Study type</Label>
           <Select
-            id="specialization"
-            name="specialization"
-            placeholder="Select specialization"
-            options={specializationOptions}
+            id="studyType"
+            name="studyType"
+            placeholder="Select studyType"
+            options={studyTypeOptions}
             onChange={(e) => handleFilterSelect(e, "spec")}
           />
         </div>

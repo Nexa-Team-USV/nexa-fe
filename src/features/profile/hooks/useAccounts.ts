@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-import { CreateAccount, Role, User, Users } from "../../../types/user.type";
+import { CreateAccount, Role, Users } from "../../../types/user.type";
 import { UserApi } from "../../../api/UserApi";
 import { mapUser } from "../../../utils/mapUser";
 
@@ -14,12 +15,8 @@ export function useAccounts() {
     admin: [],
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
   const [pages, setPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const [creatingError, setCreatingError] = useState<string>("");
-  const [deletingError, setDeletingError] = useState<string>("");
 
   const handleFetchUsers = useCallback(() => {
     setIsLoading(true);
@@ -39,29 +36,37 @@ export function useAccounts() {
         );
         setUsers(newUsers);
       })
-      .catch((error) => setError(error.response.data.message))
+      .catch(() => toast.success("Couldn't fetch the users!"))
       .finally(() => setIsLoading(false));
   }, [role, currentPage]);
 
-  function handleCreateAccount(data: CreateAccount) {
-    setIsLoading(true);
-    UserApi.createAccount(data)
-      .then(() => {
-        handleFetchUsers();
-      })
-      .catch((error) => setCreatingError(error.response.data.message))
-      .finally(() => setIsLoading(false));
-  }
+  const handleCreateAccount = useCallback(
+    function (data: CreateAccount) {
+      setIsLoading(true);
+      UserApi.createAccount(data)
+        .then((res) => {
+          toast.success(res);
+          handleFetchUsers();
+        })
+        .catch((error) => toast.error(error.response.data.message))
+        .finally(() => setIsLoading(false));
+    },
+    [handleFetchUsers],
+  );
 
-  function handleDeleteAccount(id: string) {
-    setIsLoading(true);
-    UserApi.deleteAccount(id)
-      .then(() => {
-        handleFetchUsers();
-      })
-      .catch((error) => setDeletingError(error.response.data.message))
-      .finally(() => setIsLoading(false));
-  }
+  const handleDeleteAccount = useCallback(
+    function (id: string) {
+      setIsLoading(true);
+      UserApi.deleteAccount(id)
+        .then((res) => {
+          toast.success(res);
+          handleFetchUsers();
+        })
+        .catch((error) => toast.error(error.response.data.message))
+        .finally(() => setIsLoading(false));
+    },
+    [handleFetchUsers],
+  );
 
   useEffect(() => {
     handleFetchUsers();
@@ -73,9 +78,6 @@ export function useAccounts() {
     role,
     users: users[role],
     isLoading,
-    error,
-    creatingError,
-    deletingError,
     currentPage,
     pages,
     setRole,

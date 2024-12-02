@@ -5,6 +5,7 @@ import {
   SetStateAction,
   useState,
 } from "react";
+
 import { User } from "../types/user.type";
 
 type UserContext = {
@@ -20,7 +21,7 @@ const defaultUser = {
   id: "",
   username: "",
   email: "",
-  specialization: "",
+  studyType: "",
   group: "",
   role: "",
   createdAt: "",

@@ -11,15 +11,13 @@ const options = {
 
 export default function ProfileInfo() {
   const { user } = useContext(UserContext);
-  const { username, email, specialization, group, role, createdAt } = user;
+  const { username, email, studyType, group, role, createdAt } = user;
 
   return (
     <div className="grid grid-cols-1 gap-3">
       {username && <ProfileData title="Username" data={username} />}
       {email && <ProfileData title="Email" data={email} />}
-      {specialization && (
-        <ProfileData title="Specialization" data={specialization} />
-      )}
+      {studyType && <ProfileData title="Study type" data={studyType} />}
       {group && <ProfileData title="Group" data={group} />}
       {role && <ProfileData title="Role" data={role} />}
       {createdAt && (

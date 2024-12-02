@@ -18,7 +18,7 @@ export default function LoginForm() {
   const methods = useForm<Login>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "example@example.example",
+      email: "ddd@eee.fff",
       password: "P@rola1234",
     },
   });

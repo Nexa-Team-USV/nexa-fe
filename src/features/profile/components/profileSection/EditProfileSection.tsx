@@ -2,7 +2,7 @@ import ProfileSection from "../ProfileSection";
 import SectionTitle from "../SectionTitle";
 import SubSectionTitle from "../SubSectionTitle";
 import ChangePasswordForm from "./ChangePasswordForm";
-import ChangeProfileForm from "./ChangeProfileForm";
+import EditProfileForm from "./EditProfileForm";
 import ProfileSubSectionContainer from "./ProfileSubSectionContainer";
 
 export default function ChangeProfileSection() {
@@ -12,7 +12,7 @@ export default function ChangeProfileSection() {
       <div className="space-y-8">
         <ProfileSubSectionContainer>
           <SubSectionTitle>Edit profile</SubSectionTitle>
-          <ChangeProfileForm />
+          <EditProfileForm />
         </ProfileSubSectionContainer>
         <ProfileSubSectionContainer>
           <SubSectionTitle>Change password</SubSectionTitle>

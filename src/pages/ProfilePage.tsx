@@ -1,5 +1,5 @@
 import ProfileInfoSection from "../features/profile/components/profileInfoSection/ProfileInfoSection";
-import ChangeProfileSection from "../features/profile/components/profileSection/ChangeProfileSection";
+import ChangeProfileSection from "../features/profile/components/profileSection/EditProfileSection";
 import AccountsSection from "../features/profile/components/accountsSection/AccountsSection";
 
 export default function ProfilePage() {

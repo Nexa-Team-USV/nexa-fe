@@ -21,7 +21,7 @@ type Props = {
 
 export default function Account({ user, isLoading, onDeleteAccount }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { id, username, email, specialization, group, createdAt } = user;
+  const { id, username, email, studyType, group, createdAt } = user;
 
   return (
     <>
@@ -47,9 +47,7 @@ export default function Account({ user, isLoading, onDeleteAccount }: Props) {
         <div className="grid grid-cols-4 gap-2">
           {username && <AccountField field="username" value={username} />}
           <AccountField field="email" value={email} />
-          {specialization && (
-            <AccountField field="specialization" value={specialization} />
-          )}
+          {studyType && <AccountField field="studyType" value={studyType} />}
           {group && <AccountField field="group" value={group} />}
         </div>
       </li>

@@ -2,8 +2,9 @@ import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
-import { useFormContext } from "react-hook-form";
 import InputIcon from "./InputIcon";
+
+import { useFormContext } from "react-hook-form";
 
 const containerVariants = cva("flex items-center", {
   variants: {

@@ -15,7 +15,6 @@ export default function CreateAccountSection() {
     role,
     users,
     isLoading,
-    // error,
     currentPage,
     pages,
     setRole,

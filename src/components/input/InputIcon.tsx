@@ -27,7 +27,10 @@ export default function InputIcon({
 }: Props) {
   return (
     <span
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        if (onClick) onClick();
+      }}
       className={twMerge(
         "select-none",
         inputIconVariants({ variant, className }),

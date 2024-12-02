@@ -25,7 +25,7 @@ const roleOptions = [
   },
 ];
 
-const specializationOptions = [
+const studyTypeOptions = [
   {
     value: "licenta",
     text: "Licenta",
@@ -69,7 +69,7 @@ export default function CreateAccountForm({
     defaultValues: {
       email: "",
       role: "",
-      specialization: "",
+      studyType: "",
       group: "",
     },
   });
@@ -116,15 +116,15 @@ export default function CreateAccountForm({
 
         {isStudent && (
           <div className="flex flex-col gap-1 self-start">
-            <Label htmlFor="specialization">Specialization</Label>
+            <Label htmlFor="studyType">Study type</Label>
             <Select
-              id="specialization"
-              name="specialization"
-              placeholder="Select specialization"
-              options={specializationOptions}
+              id="studyType"
+              name="studyType"
+              placeholder="Select study type"
+              options={studyTypeOptions}
             />
-            {errors.specialization && (
-              <Message variant="error">{errors.specialization.message}</Message>
+            {errors.studyType && (
+              <Message variant="error">{errors.studyType.message}</Message>
             )}
           </div>
         )}

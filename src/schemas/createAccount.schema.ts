@@ -16,12 +16,12 @@ export const createAccountSchema = z
         message: "The role field is required!",
       },
     ),
-    specialization: z.string(),
+    studyType: z.string(),
     group: z.string(),
   })
   .refine(
     (val) => {
-      const { role, specialization } = val;
+      const { role, studyType } = val;
 
       if (role === "teacher" || role === "admin") {
         return true;
@@ -29,7 +29,7 @@ export const createAccountSchema = z
 
       if (
         role === "student" &&
-        (specialization === "licenta" || specialization === "master")
+        (studyType === "licenta" || studyType === "master")
       ) {
         return true;
       }
@@ -37,8 +37,8 @@ export const createAccountSchema = z
       return false;
     },
     {
-      message: "The specialization field is required!",
-      path: ["specialization"],
+      message: "The study type field is required!",
+      path: ["studyType"],
     },
   )
   .refine(
