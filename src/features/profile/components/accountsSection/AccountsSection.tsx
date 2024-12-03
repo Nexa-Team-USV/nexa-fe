@@ -28,7 +28,7 @@ export default function CreateAccountSection() {
         onCreateAccount={handleCreateAccount}
         isLoading={isLoading}
       />
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center">
         <AccountsFilter
           role={role}
           setRole={setRole}

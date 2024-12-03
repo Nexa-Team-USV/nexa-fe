@@ -37,7 +37,7 @@ export default function AccountsFilter({
   }
 
   return (
-    <ul className="flex w-full items-center justify-between gap-2 rounded-lg border-2 border-primary bg-secondary p-1 sm:w-min sm:justify-normal">
+    <ul className="flex w-full flex-col items-center justify-between gap-2 rounded-lg border-2 border-primary bg-secondary p-1 sm:w-min sm:flex-row sm:justify-normal">
       {filters.map(({ value, text }) => (
         <li key={value} className="w-full">
           <Button

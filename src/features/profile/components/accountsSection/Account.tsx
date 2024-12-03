@@ -26,7 +26,7 @@ export default function Account({ user, isLoading, onDeleteAccount }: Props) {
   return (
     <>
       <li key={id} className="space-y-2 rounded-lg bg-white p-4">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center">
           <div className="w-min whitespace-nowrap rounded-lg bg-primary px-2 py-1 text-white">
             <span>Id: </span>
             {id}
@@ -36,21 +36,30 @@ export default function Account({ user, isLoading, onDeleteAccount }: Props) {
             {formatDateTime("en-US", createdAt, options)}
           </div>
           <Button
+            variant="reject"
+            className="w-min"
+            disabled={isLoading}
+            onClick={() => setIsOpen(true)}
+          >
+            Delete
+          </Button>
+          <Button
             variant="empty"
-            className="ml-auto"
+            className="hidden md:ml-auto"
             disabled={isLoading}
             onClick={() => setIsOpen(true)}
           >
             <HiMiniXMark className="stroke-1 text-2xl text-red-500" />
           </Button>
         </div>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
           {username && <AccountField field="username" value={username} />}
           <AccountField field="email" value={email} />
           {studyType && <AccountField field="studyType" value={studyType} />}
           {group && <AccountField field="group" value={group} />}
         </div>
       </li>
+
       {isOpen && (
         <Overlay className="fixed">
           <ConfirmationModal
