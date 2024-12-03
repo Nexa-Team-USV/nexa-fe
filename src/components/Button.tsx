@@ -2,13 +2,15 @@ import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
-const buttonVariants = cva("disabled:cursor-no-drop", {
+const buttonVariants = cva("disabled:cursor-no-drop px-2 py-1.5", {
   variants: {
     variant: {
       primary:
-        "bg-primary rounded-lg px-2 py-1.5 text-white hover:bg-primary-hover transition-colors disabled:bg-primary-disabled",
+        "bg-primary rounded-lg text-white hover:bg-primary-hover transition-colors disabled:bg-primary-disabled",
       secondary:
-        "bg-white rounded-lg px-2 py-1.5 text-primary font-medium transition-colors hover:bg-secondary-hover disabled:bg-secondary-disabled",
+        "bg-white rounded-lg text-primary font-medium transition-colors hover:bg-secondary-hover disabled:bg-secondary-disabled",
+      reject:
+        "bg-red-500 rounded-lg text-white hover:bg-red-400 transition-colors disabled:bg-red-500",
       empty: "",
     },
     size: {

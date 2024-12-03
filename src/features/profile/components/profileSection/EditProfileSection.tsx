@@ -1,11 +1,11 @@
 import ProfileSection from "../ProfileSection";
 import SectionTitle from "../SectionTitle";
 import SubSectionTitle from "../SubSectionTitle";
-import EditPasswordForm from "./EditPasswordForm";
+import ChangePasswordForm from "./ChangePasswordForm";
 import EditProfileForm from "./EditProfileForm";
 import ProfileSubSectionContainer from "./ProfileSubSectionContainer";
 
-export default function EditProfileSection() {
+export default function ChangeProfileSection() {
   return (
     <ProfileSection>
       <SectionTitle>Profile</SectionTitle>
@@ -16,7 +16,7 @@ export default function EditProfileSection() {
         </ProfileSubSectionContainer>
         <ProfileSubSectionContainer>
           <SubSectionTitle>Change password</SubSectionTitle>
-          <EditPasswordForm />
+          <ChangePasswordForm />
         </ProfileSubSectionContainer>
       </div>
     </ProfileSection>

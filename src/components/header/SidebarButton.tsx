@@ -18,10 +18,11 @@ export default function SidebarButton() {
         <HiMiniBars3 className="stroke-1 text-2xl text-white" />
       </Button>
 
-      {createPortal(
-        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />,
-        document.body,
-      )}
+      {isOpen &&
+        createPortal(
+          <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />,
+          document.body,
+        )}
     </>
   );
 }

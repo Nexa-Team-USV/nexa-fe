@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import { HiMiniChevronDown } from "react-icons/hi2";
 import { Link } from "react-router-dom";
@@ -6,12 +6,14 @@ import Button from "../Button";
 
 import { useLogout } from "../../features/authentication/hooks/useLogout";
 import { useClickOutside } from "../../hooks/useClickOutside";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function ProfileBadge() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   useClickOutside(containerRef, () => setIsOpen(false));
   const { logout } = useLogout();
+  const { user } = useContext(UserContext);
 
   return (
     <div ref={containerRef} className="relative hidden md:block">
@@ -21,7 +23,7 @@ export default function ProfileBadge() {
         className="flex items-center gap-2 rounded-lg bg-white p-2"
       >
         <div className="h-9 w-9 rounded-full bg-primary"></div>
-        <div className="font-medium">Tonu Cristian</div>
+        <div className="font-medium">{user?.username || user?.email}</div>
         <HiMiniChevronDown className="stroke-1 text-xl" />
       </Button>
 

@@ -1,13 +1,13 @@
-import CreateAccountsSection from "../features/profile/components/createAccountsSection/CreateAccountsSection";
-import DeleteAccountsSection from "../features/profile/components/deleteAccountsSection/DeleteAccountsSection";
-import EditProfileSection from "../features/profile/components/profileSection/EditProfileSection";
+import ProfileInfoSection from "../features/profile/components/profileInfoSection/ProfileInfoSection";
+import ChangeProfileSection from "../features/profile/components/profileSection/EditProfileSection";
+import AccountsSection from "../features/profile/components/accountsSection/AccountsSection";
 
 export default function ProfilePage() {
   return (
-    <div className="space-y-8 sm:space-y-16">
-      <EditProfileSection />
-      <CreateAccountsSection />
-      <DeleteAccountsSection />
+    <div className="space-y-8">
+      <ProfileInfoSection />
+      <ChangeProfileSection />
+      <AccountsSection />
     </div>
   );
 }

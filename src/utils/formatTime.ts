@@ -1,4 +1,4 @@
-export function formatTime(
+export function formatDateTime(
   locales: string,
   time: string,
   options: Intl.DateTimeFormatOptions,

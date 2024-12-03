@@ -1,8 +1,33 @@
-import { Outlet, useLocation } from "react-router";
+import { useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router";
+
 import Header from "./header/Header";
+import Loader from "./Loader";
 
 export default function AuthLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const checkAuthPaths =
+    location.pathname === "/forgotPassword" ||
+    location.pathname === "/resetPassword" ||
+    location.pathname === "/" ||
+    location.pathname === "/tests" ||
+    location.pathname === "/login";
+
+  useEffect(() => {
+    if (!checkAuthPaths) {
+      navigate("/");
+    }
+  }, [location.pathname, navigate, checkAuthPaths]);
+
+  if (!checkAuthPaths) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   if (location.pathname === "/" || location.pathname === "/tests") {
     return (
