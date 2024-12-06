@@ -32,11 +32,11 @@ export function useAccounts() {
 
         setPages(res.pages);
         setCurrentPage((prev) =>
-          res.users.length < PAGE_LIMIT ? res.pages : prev,
+          res.users.length === 0 && res.pages >= 1 ? prev - 1 : prev,
         );
         setUsers(newUsers);
       })
-      .catch(() => toast.success("Couldn't fetch the users!"))
+      .catch(() => toast.error("Couldn't fetch the users!"))
       .finally(() => setIsLoading(false));
   }, [role, currentPage]);
 

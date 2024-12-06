@@ -50,6 +50,7 @@ export default function EditProfileForm() {
       newGroup: "",
     },
   });
+
   const { handleEditProfile, isLoading } = useEditProfile();
 
   const { errors } = methods.formState;

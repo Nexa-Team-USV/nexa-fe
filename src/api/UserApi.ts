@@ -4,6 +4,7 @@ import {
   ChangePassword,
   CreateAccount,
   EditProfile,
+  EditUsername,
   UserResponse,
 } from "../types/user.type";
 
@@ -17,7 +18,7 @@ export const UserApi = {
   },
   getUsers(role: string, limit: number, offset: number) {
     return api
-      .get(`${URL}/${role}?limit=${limit}&offset=${offset}`)
+      .get(`${URL}/retrieve-users/${role}?limit=${limit}&offset=${offset}`)
       .then(
         ({ data }: AxiosResponse<{ users: UserResponse[]; pages: number }>) =>
           data,
@@ -38,7 +39,7 @@ export const UserApi = {
       .put(`${URL}/reset-password`, data)
       .then(({ data }: AxiosResponse<{ message: string }>) => data.message);
   },
-  editProfile(data: EditProfile) {
+  editProfile(data: EditProfile | EditUsername) {
     return api
       .put(`${URL}/edit-profile`, data)
       .then(
