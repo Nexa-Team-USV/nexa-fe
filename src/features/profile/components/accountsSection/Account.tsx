@@ -37,7 +37,7 @@ export default function Account({ user, isLoading, onDeleteAccount }: Props) {
           </div>
           <Button
             variant="reject"
-            className="w-min"
+            className="block w-min md:hidden"
             disabled={isLoading}
             onClick={() => setIsOpen(true)}
           >
@@ -45,7 +45,7 @@ export default function Account({ user, isLoading, onDeleteAccount }: Props) {
           </Button>
           <Button
             variant="empty"
-            className="hidden md:ml-auto"
+            className="hidden md:ml-auto md:block"
             disabled={isLoading}
             onClick={() => setIsOpen(true)}
           >

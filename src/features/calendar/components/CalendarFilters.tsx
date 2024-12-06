@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
-
 import { FormProvider, useForm } from "react-hook-form";
+
 import Label from "../../../components/Label";
 import Select from "../../../components/Select";
 import Button from "../../../components/Button";
@@ -40,7 +40,7 @@ export default function CalendarFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const methods = useForm({
     defaultValues: {
-      studyType: searchParams.get("spec") || "",
+      studyType: searchParams.get("studyType") || "",
       group: searchParams.get("group") || "",
     },
   });
@@ -58,7 +58,7 @@ export default function CalendarFilters() {
     e.preventDefault();
     const { reset } = methods;
 
-    searchParams.delete("spec");
+    searchParams.delete("studyType");
     searchParams.delete("group");
     setSearchParams(searchParams);
 
@@ -73,9 +73,9 @@ export default function CalendarFilters() {
           <Select
             id="studyType"
             name="studyType"
-            placeholder="Select studyType"
+            placeholder="Select study type"
             options={studyTypeOptions}
-            onChange={(e) => handleFilterSelect(e, "spec")}
+            onChange={(e) => handleFilterSelect(e, "studyType")}
           />
         </div>
         <div className="flex flex-col gap-1">
