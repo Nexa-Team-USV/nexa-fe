@@ -2,13 +2,14 @@ import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
-import { useFormContext } from "react-hook-form";
 import InputIcon from "./InputIcon";
+
+import { useFormContext } from "react-hook-form";
 
 const containerVariants = cva("flex items-center", {
   variants: {
     variant: {
-      primary: "border-primary border-2 rounded-lg overflow-hidden",
+      primary: "border-primary border-2 rounded-lg overflow-hidden bg-white",
     },
     size: {
       full: "w-full",

@@ -4,9 +4,9 @@ import { api } from "../config/api";
 import { SchedulingResponse } from "../types/schedule.type";
 
 export const SchedulingsApi = {
-  getSchedules() {
+  getSchedulings() {
     return api
-      .get("/schedules")
+      .get("/schedulings")
       .then(({ data }: AxiosResponse<SchedulingResponse[]>) => data);
   },
 };

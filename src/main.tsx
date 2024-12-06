@@ -8,9 +8,11 @@ import App from "./App.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import ExamsCalendar from "./features/calendar/components/ExamsCalendar.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 
 import AuthProvider from "./contexts/AuthContext.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
+import UserProvider from "./contexts/UserContext.tsx";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter(
   [
@@ -65,12 +67,22 @@ const router = createBrowserRouter(
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider
-        router={router}
-        future={{
-          v7_startTransition: true,
-        }}
-      />
+      <UserProvider>
+        <RouterProvider
+          router={router}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
+        <Toaster
+          position="top-center"
+          gutter={8}
+          toastOptions={{
+            className: "border-2 border-primary bg-white",
+            duration: 3000,
+          }}
+        />
+      </UserProvider>
     </AuthProvider>
   </StrictMode>,
 );

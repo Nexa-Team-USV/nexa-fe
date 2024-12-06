@@ -1,12 +1,12 @@
 import { ChangeEvent, FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
-
 import { FormProvider, useForm } from "react-hook-form";
+
 import Label from "../../../components/Label";
 import Select from "../../../components/Select";
 import Button from "../../../components/Button";
 
-const specializationOptions = [
+const studyTypeOptions = [
   {
     value: "licenta",
     text: "Licenta",
@@ -19,19 +19,19 @@ const specializationOptions = [
 
 const groupOptions = [
   {
-    value: "3141a",
+    value: "c3141a",
     text: "C - 3141A",
   },
   {
-    value: "3141b",
+    value: "c3141b",
     text: "C - 3141B",
   },
   {
-    value: "3142a",
+    value: "c3142a",
     text: "C - 3142A",
   },
   {
-    value: "3142b",
+    value: "c3142b",
     text: "C - 3142B",
   },
 ];
@@ -40,7 +40,7 @@ export default function CalendarFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const methods = useForm({
     defaultValues: {
-      specialization: searchParams.get("spec") || "",
+      studyType: searchParams.get("studyType") || "",
       group: searchParams.get("group") || "",
     },
   });
@@ -58,24 +58,24 @@ export default function CalendarFilters() {
     e.preventDefault();
     const { reset } = methods;
 
-    searchParams.delete("spec");
+    searchParams.delete("studyType");
     searchParams.delete("group");
     setSearchParams(searchParams);
 
-    reset({ specialization: "", group: "" });
+    reset({ studyType: "", group: "" });
   }
 
   return (
     <FormProvider {...methods}>
       <form className="grid grid-cols-1 gap-2 xsm:grid-cols-2 xsm:gap-4 sm:grid-cols-3 sm:items-end sm:gap-x-4 md:grid-cols-4">
         <div className="flex flex-col gap-1">
-          <Label htmlFor="specialization">Specialization</Label>
+          <Label htmlFor="studyType">Study type</Label>
           <Select
-            id="specialization"
-            name="specialization"
-            placeholder="Select specialization"
-            options={specializationOptions}
-            onChange={(e) => handleFilterSelect(e, "spec")}
+            id="studyType"
+            name="studyType"
+            placeholder="Select study type"
+            options={studyTypeOptions}
+            onChange={(e) => handleFilterSelect(e, "studyType")}
           />
         </div>
         <div className="flex flex-col gap-1">

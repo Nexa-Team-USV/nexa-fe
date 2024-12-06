@@ -18,10 +18,10 @@ export default function CalendarNav() {
       {links.map(({ to, text }) => (
         <li key={to} className="w-full">
           <NavLink
-            to={`/${to}`}
+            to={`${to}`}
             className={({ isActive }) =>
               twMerge(
-                "inline-block w-full rounded-lg px-4 py-1 text-center font-medium text-primary transition-colors",
+                "inline-block w-full rounded-lg px-4 py-1.5 text-center font-medium text-primary transition-colors hover:bg-white",
                 isActive && "bg-white",
               )
             }

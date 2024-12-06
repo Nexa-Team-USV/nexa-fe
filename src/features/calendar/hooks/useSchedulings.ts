@@ -2,9 +2,8 @@ import { useContext, useEffect } from "react";
 
 import { SchedulingsContext } from "../../../contexts/SchedulingsContext";
 import { SchedulingsApi } from "../../../api/SchedulingsApi";
-
-import { mapSchedules } from "../../../utils/mapSchedules";
 import { MonthsWithSchedulings } from "../../../types/schedule.type";
+import { mapSchedulings } from "../../../utils/mapSchedulings";
 
 const monthsWithSchedulings: MonthsWithSchedulings[] = [
   {
@@ -68,9 +67,9 @@ export function useSchedulings() {
   } = useContext(SchedulingsContext);
 
   useEffect(() => {
-    SchedulingsApi.getSchedules()
+    SchedulingsApi.getSchedulings()
       .then((res) => {
-        const data = mapSchedules(res);
+        const data = mapSchedulings(res);
         const months: MonthsWithSchedulings[] = JSON.parse(
           JSON.stringify(monthsWithSchedulings),
         );

@@ -8,18 +8,22 @@ import ProfileBadge from "./ProfileBadge";
 import SidebarButton from "./SidebarButton";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function Header() {
   const { isLogged } = useContext(AuthContext);
+  const {
+    user: { role },
+  } = useContext(UserContext);
 
   return (
-    <header className="flex items-center justify-between gap-6 bg-primary px-8 py-3 sm:gap-8">
+    <header className="flex items-center justify-between gap-6 bg-primary px-4 py-3 sm:gap-8 sm:px-8">
       <Link to="/" className="mr-auto">
         <Logo variant="white" />
       </Link>
       {isLogged ? (
         <>
-          <ScheduleButton />
+          {role === "teacher" && <ScheduleButton />}
           <NotificationsButton />
           <ProfileBadge />
           <SidebarButton />

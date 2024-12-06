@@ -1,42 +1,28 @@
 import { useContext, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 import AppLayout from "./components/AppLayout";
 import AuthLayout from "./components/AuthLayout";
-import Loader from "./components/Loader";
 
 import { AuthContext } from "./contexts/AuthContext";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export default function App() {
-  const { isLogged } = useContext(AuthContext);
-  const location = useLocation();
+  const { isLogged, token, setToken, setIsLogged } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const checkAuthPaths =
-    location.pathname === "/forgotPassword" ||
-    location.pathname === "/resetPassword" ||
-    location.pathname === "/" ||
-    location.pathname === "/tests" ||
-    location.pathname === "/login";
-
-  const checkAppPaths =
-    location.pathname === "/forgotPassword" ||
-    location.pathname === "/resetPassword" ||
-    location.pathname === "/login";
-
+  // Check if the token is expired
   useEffect(() => {
-    if ((!isLogged && !checkAuthPaths) || (isLogged && checkAppPaths)) {
-      navigate("/");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.exp && decodedToken.exp < Date.now() / 1000) {
+        localStorage.removeItem("token");
+        navigate("/");
+        setToken(null);
+        setIsLogged(false);
+      }
     }
-  }, [location.pathname, navigate, isLogged, checkAuthPaths, checkAppPaths]);
-
-  if ((!isLogged && !checkAuthPaths) || (isLogged && checkAppPaths)) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
+  }, [token, setIsLogged, setToken, navigate]);
 
   return isLogged ? <AppLayout /> : <AuthLayout />;
 }

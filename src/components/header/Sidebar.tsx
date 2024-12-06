@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { HiMiniXMark } from "react-icons/hi2";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Button from "../Button";
 
 import { useLogout } from "../../features/authentication/hooks/useLogout";
+import { UserContext } from "../../contexts/UserContext";
 
 type Props = {
   isOpen: boolean;
@@ -14,6 +15,7 @@ type Props = {
 
 export default function Sidebar({ isOpen, setIsOpen }: Props) {
   const { logout } = useLogout();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     if (isOpen) {
@@ -40,7 +42,7 @@ export default function Sidebar({ isOpen, setIsOpen }: Props) {
       </button>
       <div className="flex items-center gap-2 rounded-md border-2 border-primary p-2">
         <div className="h-9 w-9 rounded-full bg-primary"></div>
-        <div className="font-medium">Tonu Cristian</div>
+        <div className="font-medium">{user?.username || user?.email}</div>
       </div>
       <Link to="/profile" onClick={() => setIsOpen(false)}>
         Profile

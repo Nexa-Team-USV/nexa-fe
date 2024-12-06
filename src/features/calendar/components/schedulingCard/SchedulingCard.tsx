@@ -5,8 +5,8 @@ import {
   HiMiniUserGroup,
 } from "react-icons/hi2";
 import SchedulingCardDropdown from "./SchedulingCardDropdown";
-import { formatTime } from "../../../../utils/formatTime";
 import { Scheduling } from "../../../../types/schedule.type";
+import { formatDateTime } from "../../../../utils/formatTime";
 
 type Props = {
   scheduling: Scheduling;
@@ -34,9 +34,9 @@ export default function SchedulingCard({ scheduling }: Props) {
         <div className="flex items-center gap-2">
           <HiMiniClock className="text-xl text-primary" />
           <p className="flex items-center gap-1">
-            <span>{formatTime("en-US", startTime, options)}</span>
+            <span>{formatDateTime("en-US", startTime, options)}</span>
             <span>-</span>
-            <span>{formatTime("en-US", endTime, options)}</span>
+            <span>{formatDateTime("en-US", endTime, options)}</span>
           </p>
         </div>
         <div className="flex items-center gap-2">
