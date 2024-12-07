@@ -31,8 +31,13 @@ export default function LoginForm() {
       <form className="space-y-3" onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-1">
           <Label htmlFor="email">Email</Label>
-          <Input type="text" name="email" placeholder="Enter your email..." />
-          {errors.email?.message && (
+          <Input
+            id="email"
+            type="text"
+            name="email"
+            placeholder="Enter your email..."
+          />
+          {errors.email && (
             <Message variant="error">{errors.email.message}</Message>
           )}
         </div>

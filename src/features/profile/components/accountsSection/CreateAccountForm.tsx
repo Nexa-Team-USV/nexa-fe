@@ -91,9 +91,9 @@ export default function CreateAccountForm({
         <div className="flex flex-col gap-1 self-start">
           <Label htmlFor="emailToCreate">Email</Label>
           <Input
+            id="emailToCreate"
             type="text"
             name="email"
-            id="emailToCreate"
             placeholder="Enter your email..."
           />
           {errors.email && (

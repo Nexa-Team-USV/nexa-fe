@@ -16,6 +16,7 @@ type Props = DetailedHTMLProps<
 };
 
 export default function HidePasswordInput({
+  htmlFor,
   label,
   error,
   ...props
@@ -24,7 +25,7 @@ export default function HidePasswordInput({
 
   return (
     <div className="flex flex-col gap-1">
-      <Label htmlFor="password">{label}</Label>
+      <Label htmlFor={htmlFor}>{label}</Label>
       <Input
         {...props}
         type={isHidden ? "password" : "text"}

@@ -23,7 +23,8 @@ export default function Header() {
       </Link>
       {isLogged ? (
         <>
-          {role === "teacher" && <ScheduleButton />}
+          {/* {role === "teacher" && <ScheduleButton />} */}
+          <ScheduleButton />
           <NotificationsButton />
           <ProfileBadge />
           <SidebarButton />

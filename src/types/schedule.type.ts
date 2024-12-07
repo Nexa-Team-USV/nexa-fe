@@ -1,3 +1,6 @@
+import { z } from "zod";
+import { scheduleExamTestSchema } from "../schemas/scheduleExamTest.schema";
+
 export type SchedulingResponse = {
   id: number;
   title: string;
@@ -38,3 +41,5 @@ export type MonthsWithSchedulings = {
   month: Months;
   monthSchedulings: Scheduling[];
 };
+
+export type ScheduleExamTest = z.infer<typeof scheduleExamTestSchema>;
