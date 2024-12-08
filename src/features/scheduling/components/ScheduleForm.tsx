@@ -11,11 +11,22 @@ import Textarea from "../../../components/Textarea";
 import { ScheduleExamTest } from "../../../types/schedule.type";
 import { scheduleExamTestSchema } from "../../../schemas/scheduleExamTest.schema";
 import { ChangeEvent, useState } from "react";
-import { HiMiniXMark } from "react-icons/hi2";
+import { HiMiniPlus, HiMiniXMark } from "react-icons/hi2";
 
 const typeOptions = [
   { value: "exam", text: "Exam" },
   { value: "test", text: "Test" },
+];
+
+const studyTypeOptions = [
+  {
+    value: "licenta",
+    text: "Licenta",
+  },
+  {
+    value: "master",
+    text: "Master",
+  },
 ];
 
 const classroomOptions = [
@@ -37,8 +48,9 @@ export default function ScheduleForm() {
     defaultValues: {
       type: "",
       title: "",
+      studyType: "",
       group: "",
-      assistants: "",
+      assistant: "",
       classroom: "",
       date: "",
       startTime: "",
@@ -48,6 +60,7 @@ export default function ScheduleForm() {
     resolver: zodResolver(scheduleExamTestSchema),
   });
   const [classrooms, setClassrooms] = useState<string[]>([]);
+  const [assistants, setAssistants] = useState<string[]>([]);
 
   const { errors } = methods.formState;
 
@@ -61,6 +74,17 @@ export default function ScheduleForm() {
     setClassrooms((prev) => [...prev.filter((_, i) => i !== index)]);
   }
 
+  function handleAddAssistant() {
+    const assistant = methods.watch("assistant");
+    setAssistants((prev) =>
+      !prev.includes(assistant) ? [...prev, assistant] : [...prev],
+    );
+  }
+
+  function handleDeleteAssistant(index: number) {
+    setAssistants((prev) => [...prev.filter((_, i) => i !== index)]);
+  }
+
   const onSubmit: SubmitHandler<ScheduleExamTest> = (data) => {
     console.log(data);
   };
@@ -68,12 +92,12 @@ export default function ScheduleForm() {
   return (
     <FormProvider {...methods}>
       <form
-        className="w-full max-w-4xl space-y-6 rounded-lg border-2 border-primary bg-white p-6"
+        className="w-full max-w-6xl space-y-6 rounded-lg border-2 border-primary bg-white p-6"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
-        <div className="grid grid-cols-3 items-center justify-between gap-4">
+        <div className="grid grid-cols-4 items-center justify-between gap-4">
           <h2 className="self-start text-lg font-bold">Schedule Form</h2>
-          <div className="col-start-3 flex flex-col gap-1">
+          <div className="col-start-4 flex flex-col gap-1">
             <Select
               id="type"
               name="type"
@@ -86,7 +110,7 @@ export default function ScheduleForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-4 gap-4">
           <div className="flex flex-col gap-1">
             <Label htmlFor="title">Title</Label>
             <Input
@@ -97,6 +121,19 @@ export default function ScheduleForm() {
             />
             {errors.title && (
               <Message variant="error">{errors.title.message}</Message>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <Label htmlFor="studyType">Study type</Label>
+            <Select
+              id="studyType"
+              name="studyType"
+              placeholder="Select study type"
+              options={studyTypeOptions}
+            />
+            {errors.studyType && (
+              <Message variant="error">{errors.studyType.message}</Message>
             )}
           </div>
 
@@ -113,18 +150,50 @@ export default function ScheduleForm() {
             )}
           </div>
 
-          <div className="flex flex-col gap-1">
-            <Label htmlFor="assistants">Assistants</Label>
-            <Input
-              type="text"
-              id="assistants"
-              name="assistants"
-              placeholder="Enter the assistants..."
-            />
-            {errors.assistants && (
-              <Message variant="error">{errors.assistants.message}</Message>
+          <div className="col-start-4 row-start-2 flex flex-col gap-1">
+            <Label htmlFor="assistant">Assistant</Label>
+            <div className="flex items-center gap-2">
+              <Input
+                type="text"
+                id="assistant"
+                name="assistant"
+                placeholder="Enter the assistant..."
+              />
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddAssistant();
+                }}
+                variant="empty"
+              >
+                <HiMiniPlus className="stroke-1 text-2xl text-primary" />
+              </Button>
+            </div>
+            {errors.assistant && (
+              <Message variant="error">{errors.assistant.message}</Message>
             )}
           </div>
+
+          {assistants.length > 0 && (
+            <div className="col-span-2 row-start-3 space-y-1">
+              <h4 className="text-sm font-medium">Assistants list</h4>
+              <ul className="scrollbar flex max-h-20 flex-col gap-1 overflow-auto rounded-lg border-2 border-primary px-2 py-1">
+                {assistants.map((classroom, i) => (
+                  <li key={classroom} className="flex items-center gap-2">
+                    <span>{`${i + 1}.)`}</span>
+                    <span>{classroom}</span>
+                    <Button
+                      variant="empty"
+                      onClick={() => handleDeleteAssistant(i)}
+                      className="ml-auto"
+                    >
+                      <HiMiniXMark className="stroke-1 text-2xl text-red-500" />
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="flex flex-col gap-1">
             <Label htmlFor="date">Date</Label>
@@ -182,24 +251,27 @@ export default function ScheduleForm() {
           </div>
 
           {classrooms.length > 0 && (
-            <ul className="scrollbar col-span-3 row-start-4 flex max-h-32 flex-col gap-1 overflow-auto rounded-lg border-2 border-primary px-2 py-1">
-              {classrooms.map((classroom, i) => (
-                <li key={classroom} className="flex items-center gap-2">
-                  <span>{`${i + 1}.)`}</span>
-                  <span>{classroom}</span>
-                  <Button
-                    variant="empty"
-                    onClick={() => handleDeleteClassroom(i)}
-                    className="ml-auto"
-                  >
-                    <HiMiniXMark className="stroke-1 text-2xl text-red-500" />
-                  </Button>
-                </li>
-              ))}
-            </ul>
+            <div className="col-span-2 col-start-1 row-start-3 space-y-1">
+              <h4 className="text-sm font-medium">Classrooms list</h4>
+              <ul className="scrollbar flex max-h-20 flex-col gap-1 overflow-auto rounded-lg border-2 border-primary px-2 py-1">
+                {classrooms.map((classroom, i) => (
+                  <li key={classroom} className="flex items-center gap-2">
+                    <span>{`${i + 1}.)`}</span>
+                    <span>{classroom}</span>
+                    <Button
+                      variant="empty"
+                      onClick={() => handleDeleteClassroom(i)}
+                      className="ml-auto"
+                    >
+                      <HiMiniXMark className="stroke-1 text-2xl text-red-500" />
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
 
-          <div className="col-span-3 flex flex-col gap-1">
+          <div className="col-span-4 flex flex-col gap-1">
             <Label htmlFor="description">Description</Label>
             <Textarea
               id="description"
