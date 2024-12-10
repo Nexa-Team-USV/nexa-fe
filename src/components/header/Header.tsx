@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import ScheduleButton from "../../features/scheduling/components/ScheduleButton";
+import ProposalButton from "../../features/proposal/components/ProposalButton";
+
 import NotificationsButton from "../../features/notifications/components/NotificationsButton";
 import ProfileBadge from "./ProfileBadge";
 import SidebarButton from "./SidebarButton";
@@ -24,6 +26,7 @@ export default function Header() {
       {isLogged ? (
         <>
           {/* {role === "teacher" && <ScheduleButton />} */}
+          <ProposalButton />
           <ScheduleButton />
           <NotificationsButton />
           <ProfileBadge />
