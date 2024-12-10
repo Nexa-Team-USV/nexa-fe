@@ -15,7 +15,7 @@ export default function ProposalButton() {
         variant="secondary"
         className="hidden px-4 sm:inline-block"
       >
-        Proposal
+        Propose
       </Button>
       <Button
         onClick={() => setIsOpen(true)}
