@@ -15,7 +15,7 @@ export const scheduleExamTestSchema = z.object({
   title: z
     .string()
     .min(1, "The title field is required!")
-    .max(20, "The title shouldn't be longer than 30 characters!"),
+    .max(40, "The title shouldn't be longer than 40 characters!"),
   group: z.string().min(1, "The group field is required!"),
   studyType: z.string().refine(
     (val) => {
