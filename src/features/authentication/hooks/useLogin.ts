@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 import { AuthContext } from "../../../contexts/AuthContext";
 import { AuthApi } from "../../../api/AuthApi";
 
 export function useLogin() {
-  const { isLoading, error, setToken, setIsLogged, setIsLoading, setError } =
+  const { isLoading, setToken, setIsLogged, setIsLoading } =
     useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -19,9 +20,9 @@ export function useLogin() {
         setIsLogged(true);
         navigate("/");
       })
-      .catch((error) => setError(error.response.data.message))
+      .catch((error) => toast.error(error.response.data.message))
       .finally(() => setIsLoading(false));
   }
 
-  return { login, isLoading, error };
+  return { login, isLoading };
 }

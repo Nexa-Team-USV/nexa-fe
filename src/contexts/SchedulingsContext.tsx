@@ -5,24 +5,72 @@ import {
   SetStateAction,
   useState,
 } from "react";
+
 import { MonthsWithSchedulings } from "../types/schedule.type";
+
+const monthsWithSchedulings: MonthsWithSchedulings[] = [
+  {
+    month: "January",
+    monthSchedulings: [],
+  },
+  {
+    month: "February",
+    monthSchedulings: [],
+  },
+  {
+    month: "March",
+    monthSchedulings: [],
+  },
+  {
+    month: "April",
+    monthSchedulings: [],
+  },
+  {
+    month: "May",
+    monthSchedulings: [],
+  },
+  {
+    month: "June",
+    monthSchedulings: [],
+  },
+  {
+    month: "July",
+    monthSchedulings: [],
+  },
+  {
+    month: "August",
+    monthSchedulings: [],
+  },
+  {
+    month: "September",
+    monthSchedulings: [],
+  },
+  {
+    month: "October",
+    monthSchedulings: [],
+  },
+  {
+    month: "November",
+    monthSchedulings: [],
+  },
+  {
+    month: "December",
+    monthSchedulings: [],
+  },
+];
 
 type SchedulingsContext = {
   schedulings: MonthsWithSchedulings[];
   isLoading: boolean;
-  error: string;
   setSchedulings: Dispatch<SetStateAction<MonthsWithSchedulings[]>>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
-  setError: Dispatch<SetStateAction<string>>;
 };
 
 export const SchedulingsContext = createContext<SchedulingsContext>({
-  schedulings: [],
+  schedulings: monthsWithSchedulings,
   isLoading: true,
-  error: "",
   setSchedulings: () => undefined,
   setIsLoading: () => undefined,
-  setError: () => undefined,
 });
 
 type Props = {
@@ -30,19 +78,18 @@ type Props = {
 };
 
 export default function SchedulingsProvider({ children }: Props) {
-  const [schedulings, setSchedulings] = useState<MonthsWithSchedulings[]>([]);
+  const [schedulings, setSchedulings] = useState<MonthsWithSchedulings[]>(
+    monthsWithSchedulings,
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
 
   return (
     <SchedulingsContext.Provider
       value={{
         schedulings,
         isLoading,
-        error,
         setSchedulings,
         setIsLoading,
-        setError,
       }}
     >
       {children}

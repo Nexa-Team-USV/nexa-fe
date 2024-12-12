@@ -5,24 +5,21 @@ import AppLayout from "./components/AppLayout";
 import AuthLayout from "./components/AuthLayout";
 
 import { AuthContext } from "./contexts/AuthContext";
-import { useNavigate } from "react-router";
+import { useLogout } from "./features/authentication/hooks/useLogout";
 
 export default function App() {
-  const { isLogged, token, setToken, setIsLogged } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { isLogged, token } = useContext(AuthContext);
+  const { logout } = useLogout();
 
   // Check if the token is expired
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
       if (decodedToken.exp && decodedToken.exp < Date.now() / 1000) {
-        localStorage.removeItem("token");
-        navigate("/");
-        setToken(null);
-        setIsLogged(false);
+        logout();
       }
     }
-  }, [token, setIsLogged, setToken, navigate]);
+  }, [token, logout]);
 
   return isLogged ? <AppLayout /> : <AuthLayout />;
 }

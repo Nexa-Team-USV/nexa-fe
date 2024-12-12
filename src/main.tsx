@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage.tsx";
 import AuthProvider from "./contexts/AuthContext.tsx";
 import UserProvider from "./contexts/UserContext.tsx";
 import { Toaster } from "react-hot-toast";
+import SchedulingsProvider from "./contexts/SchedulingsContext.tsx";
 
 const router = createBrowserRouter(
   [
@@ -68,20 +69,22 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
       <UserProvider>
-        <RouterProvider
-          router={router}
-          future={{
-            v7_startTransition: true,
-          }}
-        />
-        <Toaster
-          position="top-center"
-          gutter={8}
-          toastOptions={{
-            className: "border-2 border-primary bg-white",
-            duration: 3000,
-          }}
-        />
+        <SchedulingsProvider>
+          <RouterProvider
+            router={router}
+            future={{
+              v7_startTransition: true,
+            }}
+          />
+          <Toaster
+            position="top-center"
+            gutter={8}
+            toastOptions={{
+              className: "border-2 border-primary bg-white",
+              duration: 3000,
+            }}
+          />
+        </SchedulingsProvider>
       </UserProvider>
     </AuthProvider>
   </StrictMode>,
