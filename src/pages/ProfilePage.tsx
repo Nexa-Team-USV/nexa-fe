@@ -15,8 +15,7 @@ export default function ProfilePage() {
     <div className="space-y-8">
       <ProfileInfoSection />
       <ChangeProfileSection />
-      {/* {role === "admin" && <AccountsSection />} */}
-      <AccountsSection />
+      {role === "admin" && <AccountsSection />}
     </div>
   );
 }

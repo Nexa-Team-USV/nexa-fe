@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react";
 
 import { SchedulingsContext } from "../../../contexts/SchedulingsContext";
-import { SchedulingsApi } from "../../../api/SchedulingsApi";
+// import { SchedulingsApi } from "../../../api/SchedulingsApi";
 import { MonthsWithSchedulings } from "../../../types/schedule.type";
-import { mapSchedulings } from "../../../utils/mapSchedulings";
+// import { mapSchedulings } from "../../../utils/mapScheduling";
+// import toast from "react-hot-toast";
 
 const monthsWithSchedulings: MonthsWithSchedulings[] = [
   {
@@ -57,37 +58,31 @@ const monthsWithSchedulings: MonthsWithSchedulings[] = [
 ];
 
 export function useSchedulings() {
-  const {
-    schedulings,
-    isLoading,
-    error,
-    setSchedulings,
-    setIsLoading,
-    setError,
-  } = useContext(SchedulingsContext);
+  const { schedulings, isLoading, setSchedulings, setIsLoading } =
+    useContext(SchedulingsContext);
 
   useEffect(() => {
-    SchedulingsApi.getSchedulings()
-      .then((res) => {
-        const data = mapSchedulings(res);
-        const months: MonthsWithSchedulings[] = JSON.parse(
-          JSON.stringify(monthsWithSchedulings),
-        );
-        data.forEach((scheduling) => {
-          const month = new Date(scheduling.date).getUTCMonth();
-          months[month].monthSchedulings.push(scheduling);
-          months[month].monthSchedulings.sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-          );
-        });
-        const filteredEmptyMonths = months.filter(
-          (month) => month.monthSchedulings.length,
-        );
-        setSchedulings(filteredEmptyMonths);
-        setIsLoading(false);
-      })
-      .catch((error) => setError(error.response.data.message));
-  }, [setSchedulings, setIsLoading, setError]);
+    // SchedulingsApi.getSchedulings()
+    //   .then((res) => {
+    //     const data = mapSchedulings(res);
+    //     const months: MonthsWithSchedulings[] = JSON.parse(
+    //       JSON.stringify(monthsWithSchedulings),
+    //     );
+    //     data.forEach((scheduling) => {
+    //       const month = new Date(scheduling.date).getUTCMonth();
+    //       months[month].monthSchedulings.push(scheduling);
+    //       months[month].monthSchedulings.sort(
+    //         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    //       );
+    //     });
+    //     const filteredEmptyMonths = months.filter(
+    //       (month) => month.monthSchedulings.length,
+    //     );
+    //     setSchedulings(filteredEmptyMonths);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => toast.error(error.response.data.message));
+  }, [setSchedulings, setIsLoading]);
 
-  return { schedulings, isLoading, error };
+  return { schedulings, isLoading };
 }
