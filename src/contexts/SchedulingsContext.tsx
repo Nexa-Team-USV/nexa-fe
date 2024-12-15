@@ -8,7 +8,7 @@ import {
 
 import { MonthsWithSchedulings } from "../types/schedule.type";
 
-const monthsWithSchedulings: MonthsWithSchedulings[] = [
+export const monthsWithSchedulings: MonthsWithSchedulings[] = [
   {
     month: "January",
     monthSchedulings: [],

@@ -5,9 +5,15 @@ import { HiMiniEllipsisVertical } from "react-icons/hi2";
 import Button from "../../../../components/Button";
 
 import { useClickOutside } from "../../../../hooks/useClickOutside";
+import { useDeleteScheduling } from "../../hooks/useDeleteScheduling";
 
-export default function SchedulingCardDropdown() {
+type Props = {
+  schedulingId: string;
+};
+
+export default function SchedulingCardDropdown({ schedulingId }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isLoading, deleteScheduling } = useDeleteScheduling();
   const containerRef = useRef<HTMLDivElement>(null);
   useClickOutside(containerRef, () => setIsOpen(false));
 
@@ -42,14 +48,8 @@ export default function SchedulingCardDropdown() {
           <li>
             <Button
               variant="empty"
-              className="w-full rounded-lg p-2 text-left transition-colors hover:bg-secondary"
-            >
-              Info
-            </Button>
-          </li>
-          <li>
-            <Button
-              variant="empty"
+              disabled={isLoading}
+              onClick={() => deleteScheduling(schedulingId)}
               className="w-full rounded-lg p-2 text-left transition-colors hover:bg-secondary"
             >
               Delete

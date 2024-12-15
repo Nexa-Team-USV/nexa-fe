@@ -2,7 +2,7 @@ import { z } from "zod";
 import { scheduleExamTestSchema } from "../schemas/scheduleExamTest.schema";
 
 export type SchedulingResponse = {
-  _id: number;
+  _id: string;
   type: string;
   title: string;
   studyType: string;
@@ -13,11 +13,11 @@ export type SchedulingResponse = {
   assistants: string;
   description: string;
   created_at: string;
-  teacher_id: number;
+  teacher_id: string;
 };
 
 export type Scheduling = {
-  id: number;
+  id: string;
   type: string;
   title: string;
   studyType: string;
@@ -28,7 +28,7 @@ export type Scheduling = {
   assistants: string;
   description: string;
   createdAt: string;
-  teacherId: number;
+  teacherId: string;
 };
 
 export type Months =

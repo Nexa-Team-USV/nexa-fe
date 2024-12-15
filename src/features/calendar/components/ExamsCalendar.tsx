@@ -1,27 +1,22 @@
 import SchedulingCard from "./schedulingCard/SchedulingCard";
 import Loader from "../../../components/Loader";
 
-import { useSchedulings } from "../hooks/useSchedulings";
+import { useFetchSchedulings } from "../hooks/useFetchSchedulings";
 
 export default function ExamsCalendar() {
-  // const { schedulings, isLoading, error } = useSchedulings();
+  const { schedulings, isLoading } = useFetchSchedulings();
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex h-60 w-full items-center justify-center">
-  //       <Loader />
-  //     </div>
-  //   );
-  // }
-
-  // if (error) {
-  //   return <div>Something went wrong...</div>;
-  // }
+  if (isLoading) {
+    return (
+      <div className="flex h-60 w-full items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <ul className="space-y-6">
-      Exams
-      {/* {schedulings.map(({ month, monthSchedulings }) => (
+      {schedulings.map(({ month, monthSchedulings }) => (
         <li key={month} className="space-y-2">
           <h2 className="text-xl font-semibold">{month}</h2>
           <ul key={month} className="space-y-4">
@@ -30,7 +25,7 @@ export default function ExamsCalendar() {
             ))}
           </ul>
         </li>
-      ))} */}
+      ))}
     </ul>
   );
 }
