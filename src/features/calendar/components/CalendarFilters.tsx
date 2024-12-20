@@ -45,6 +45,8 @@ export default function CalendarFilters() {
     },
   });
 
+  const { reset } = methods;
+
   function handleFilterSelect(
     e: ChangeEvent<HTMLSelectElement>,
     filter: string,
@@ -56,7 +58,6 @@ export default function CalendarFilters() {
 
   function resetFilters(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const { reset } = methods;
 
     searchParams.delete("studyType");
     searchParams.delete("group");

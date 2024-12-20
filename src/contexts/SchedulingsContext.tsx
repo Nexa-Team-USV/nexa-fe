@@ -68,7 +68,7 @@ type SchedulingsContext = {
 
 export const SchedulingsContext = createContext<SchedulingsContext>({
   schedulings: monthsWithSchedulings,
-  isLoading: true,
+  isLoading: false,
   setSchedulings: () => undefined,
   setIsLoading: () => undefined,
 });
@@ -81,7 +81,7 @@ export default function SchedulingsProvider({ children }: Props) {
   const [schedulings, setSchedulings] = useState<MonthsWithSchedulings[]>(
     monthsWithSchedulings,
   );
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <SchedulingsContext.Provider

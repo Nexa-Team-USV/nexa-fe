@@ -9,7 +9,7 @@ import App from "./App.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
-import ExamsCalendar from "./features/calendar/components/ExamsCalendar.tsx";
+import SchedulingsCalendar from "./features/calendar/components/SchedulingsCalendar.tsx";
 
 import AuthProvider from "./contexts/AuthContext.tsx";
 import UserProvider from "./contexts/UserContext.tsx";
@@ -27,11 +27,11 @@ const router = createBrowserRouter(
           children: [
             {
               path: "/",
-              element: <ExamsCalendar />,
+              element: <SchedulingsCalendar />,
             },
             {
               path: "/tests",
-              element: <div>tests</div>,
+              element: <SchedulingsCalendar />,
             },
           ],
         },

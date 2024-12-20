@@ -17,14 +17,13 @@ export default function Header() {
   } = useContext(UserContext);
 
   return (
-    <header className="flex items-center justify-between gap-6 bg-primary px-4 py-3 sm:gap-8 sm:px-8">
+    <header className="flex h-20 items-center justify-between gap-6 bg-primary px-4 py-3 sm:gap-8 sm:px-8">
       <Link to="/" className="mr-auto">
         <Logo variant="white" />
       </Link>
       {isLogged ? (
         <>
-          {/* {role === "teacher" && <ScheduleButton />} */}
-          <ScheduleButton />
+          {role === "teacher" && <ScheduleButton />}
           <NotificationsButton />
           <ProfileBadge />
           <SidebarButton />

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 import {
   HiMiniClipboard,
   HiMiniClock,
@@ -5,7 +7,6 @@ import {
   HiMiniUser,
   HiMiniUserGroup,
 } from "react-icons/hi2";
-
 import SchedulingCardDropdown from "./SchedulingCardDropdown";
 import SchedulingCardSkeleton from "../schedulingCardSkeleton/SchedulingCardSkeleton";
 import SchedulingCardDescription from "./SchedulingCardDescription";
@@ -13,6 +14,7 @@ import SchedulingCardDescription from "./SchedulingCardDescription";
 import { Scheduling } from "../../../../types/schedule.type";
 import { formatDateTime } from "../../../../utils/formatTime";
 import { useFetchSchedulingInfo } from "../../hooks/useFetchSchedulingInfo";
+import { UserContext } from "../../../../contexts/UserContext";
 
 type Props = {
   scheduling: Scheduling;
@@ -37,6 +39,9 @@ export default function SchedulingCard({ scheduling }: Props) {
     description,
     teacherId,
   } = scheduling;
+  const {
+    user: { role },
+  } = useContext(UserContext);
   const { teacherName, classrooms, isLoading } = useFetchSchedulingInfo(
     id,
     teacherId,
@@ -87,7 +92,7 @@ export default function SchedulingCard({ scheduling }: Props) {
       </div>
 
       <div className="ml-auto flex flex-row-reverse items-center gap-2 xsm:flex-col">
-        <SchedulingCardDropdown schedulingId={id} />
+        {role === "teacher" && <SchedulingCardDropdown schedulingId={id} />}
         {description && <SchedulingCardDescription description={description} />}
       </div>
     </div>

@@ -7,7 +7,7 @@ const URL = "/api/schedulings";
 export const SchedulingsApi = {
   getSchedulings(type: string, search: string) {
     return api
-      .get(`${URL}/retrieve-schedulings${type ? `/${type}` : ""}${search}`)
+      .get(`${URL}/retrieve-schedulings${type ? `${type}` : ""}${search}`)
       .then(
         ({ data }: AxiosResponse<{ schedulings: SchedulingResponse[] }>) =>
           data.schedulings,
