@@ -2,10 +2,10 @@ import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 
 import { SchedulingsApi } from "../../../api/SchedulingsApi";
-import { SchedulingsContext } from "../../../contexts/SchedulingsContext";
 import { mapScheduling } from "../../../utils/mapScheduling";
 import { Schedule } from "../../../types/schedule.type";
 import { UserContext } from "../../../contexts/UserContext";
+import { SchedulingsContext } from "../../../contexts/SchedulingsContext";
 
 export function useSchedule() {
   const { schedulings, setSchedulings } = useContext(SchedulingsContext);
@@ -18,6 +18,7 @@ export function useSchedule() {
       .then((res) => {
         const scheduling = mapScheduling(res);
         const month = new Date(scheduling.date).getMonth();
+
         const schedulingsCopy = JSON.parse(JSON.stringify(schedulings));
 
         schedulingsCopy[month].monthSchedulings = [

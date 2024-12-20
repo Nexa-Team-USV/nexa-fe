@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router";
 
 import Header from "./header/Header";
 import Loader from "./Loader";
+
 import { useFetchUser } from "../hooks/useFetchUser";
 
 export default function AppLayout() {

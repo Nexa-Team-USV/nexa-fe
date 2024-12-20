@@ -38,10 +38,10 @@ const classroomOptions = [
 ];
 
 const groupOptions = [
-  { value: "3141a", text: "C - 3141A" },
-  { value: "3141b", text: "C - 3141B" },
-  { value: "3142a", text: "C - 3142A" },
-  { value: "3142b", text: "C - 3142B" },
+  { value: "c3141a", text: "C - 3141A" },
+  { value: "c3141b", text: "C - 3141B" },
+  { value: "c3142a", text: "C - 3142A" },
+  { value: "c3142b", text: "C - 3142B" },
 ];
 
 export default function ScheduleForm() {
