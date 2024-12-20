@@ -2,17 +2,17 @@ import { ChangeEvent, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import Button from "../../../components/Button";
-import Label from "../../../components/Label";
-import Input from "../../../components/input/Input";
-import Select from "../../../components/Select";
-import Message from "../../../components/Message";
-import Textarea from "../../../components/Textarea";
+import Select from "../../../../components/Select";
+import Message from "../../../../components/Message";
+import Label from "../../../../components/Label";
+import Input from "../../../../components/input/Input";
+import Button from "../../../../components/Button";
+import Textarea from "../../../../components/Textarea";
 import { HiMiniPlus, HiMiniXMark } from "react-icons/hi2";
 
-import { ScheduleExamTest } from "../../../types/schedule.type";
-import { scheduleExamTestSchema } from "../../../schemas/scheduleExamTest.schema";
-import { useSchedule } from "../hooks/useSchedule";
+import { EditExamTest, Scheduling } from "../../../../types/schedule.type";
+import { scheduleExamTestSchema } from "../../../../schemas/scheduleExamTest.schema";
+import { useEditScheduling } from "../../hooks/useEditScheduling";
 
 const typeOptions = [
   { value: "exam", text: "Exam" },
@@ -44,28 +44,33 @@ const groupOptions = [
   { value: "C3142B", text: "C - 3142B" },
 ];
 
-export default function ScheduleForm() {
-  const methods = useForm<ScheduleExamTest>({
+type Props = {
+  scheduling: Scheduling & {
+    classrooms: string[];
+  };
+};
+
+export default function EditSchedulingForm({ scheduling }: Props) {
+  const methods = useForm<EditExamTest>({
     defaultValues: {
-      type: "",
-      title: "",
-      studyType: "",
-      group: "",
+      ...scheduling,
+      date: scheduling.date.split("T")[0],
+      startTime: scheduling.startTime.split("T")[1].replace("Z", ""),
+      endTime: scheduling.endTime.split("T")[1].replace("Z", ""),
       assistant: "",
       classroom: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      description: "",
-      classrooms: [],
-      assistants: [],
+      assistants: scheduling.assistants.split(", "),
     },
     resolver: zodResolver(scheduleExamTestSchema),
   });
-  const [classrooms, setClassrooms] = useState<string[]>([]);
-  const [assistants, setAssistants] = useState<string[]>([]);
+  const [classrooms, setClassrooms] = useState<string[]>([
+    ...scheduling.classrooms,
+  ]);
+  const [assistants, setAssistants] = useState<string[]>(
+    scheduling.assistants.split(", "),
+  );
 
-  const { schedule, isLoading } = useSchedule();
+  const { editScheduling } = useEditScheduling();
 
   const { errors } = methods.formState;
 
@@ -107,8 +112,11 @@ export default function ScheduleForm() {
     methods.setValue("assistants", updatedAssistants as [string, ...string[]]);
   }
 
-  const onSubmit: SubmitHandler<ScheduleExamTest> = (data) => {
-    schedule(data);
+  const onSubmit: SubmitHandler<EditExamTest> = (data) => {
+    // const schedulingId = scheduling.id;
+    // console.log(data);
+    // const { classroom, assistant, ...scheduling } = data;
+    editScheduling(scheduling.id, data);
   };
 
   return (
@@ -118,7 +126,7 @@ export default function ScheduleForm() {
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <div className="grid grid-cols-1 items-center justify-between gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <h2 className="self-start text-lg font-bold">Schedule Form</h2>
+          <h2 className="self-start text-lg font-bold">Edit Scheduling Form</h2>
           <div className="flex flex-col gap-1 lg:col-start-4">
             <Select
               id="type"
@@ -306,12 +314,8 @@ export default function ScheduleForm() {
             )}
           </div>
 
-          <Button
-            type="submit"
-            disabled={isLoading}
-            className="sm:col-start-2 lg:col-start-4"
-          >
-            Submit
+          <Button type="submit" className="sm:col-start-2 lg:col-start-4">
+            Save
           </Button>
         </div>
       </form>

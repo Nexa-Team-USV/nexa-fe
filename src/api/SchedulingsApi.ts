@@ -1,6 +1,10 @@
 import { AxiosResponse } from "axios";
 import { api } from "../config/api";
-import { Schedule, SchedulingResponse } from "../types/schedule.type";
+import {
+  EditScheduling,
+  Schedule,
+  SchedulingResponse,
+} from "../types/schedule.type";
 
 const URL = "/api/schedulings";
 
@@ -17,12 +21,20 @@ export const SchedulingsApi = {
     return api
       .get(`${URL}/retrieve-classrooms/${schedulingId}`)
       .then(
-        ({ data }: AxiosResponse<{ classrooms: string }>) => data.classrooms,
+        ({ data }: AxiosResponse<{ classrooms: string[] }>) => data.classrooms,
       );
   },
   schedule(data: Schedule) {
     return api
       .post(`${URL}/schedule`, data)
+      .then(
+        ({ data }: AxiosResponse<{ scheduling: SchedulingResponse }>) =>
+          data.scheduling,
+      );
+  },
+  editScheduling(schedulingId: string, data: EditScheduling) {
+    return api
+      .put(`${URL}/edit-scheduling/${schedulingId}`, data)
       .then(
         ({ data }: AxiosResponse<{ scheduling: SchedulingResponse }>) =>
           data.scheduling,
