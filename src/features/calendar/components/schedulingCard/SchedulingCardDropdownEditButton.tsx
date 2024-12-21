@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 import Button from "../../../../components/Button";
 import Overlay from "../../../../components/Overlay";
 import EditSchedulingForm from "./EditSchedulingForm";
@@ -11,19 +9,21 @@ type Props = {
     classrooms: string[];
   };
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onEditSchedulingFormOpen: () => void;
+  onEditSchedulingFormClose: () => void;
 };
 
 export default function SchedulingCardDropdownEditButton({
   scheduling,
   isOpen,
-  setIsOpen,
+  onEditSchedulingFormOpen,
+  onEditSchedulingFormClose,
 }: Props) {
   return (
     <>
       <Button
         variant="empty"
-        onClick={() => setIsOpen(true)}
+        onClick={onEditSchedulingFormOpen}
         className="w-full rounded-lg p-2 text-left transition-colors hover:bg-secondary"
       >
         Edit
@@ -33,7 +33,7 @@ export default function SchedulingCardDropdownEditButton({
         <Overlay>
           <Button
             variant="empty"
-            onClick={() => setIsOpen(false)}
+            onClick={onEditSchedulingFormClose}
             className="absolute right-5 top-5"
           >
             <HiMiniXMark className="stroke-1 text-2xl text-primary" />

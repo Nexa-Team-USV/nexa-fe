@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
@@ -7,6 +7,7 @@ import SchedulingCardDropdownEditButton from "./SchedulingCardDropdownEditButton
 
 import { useDeleteScheduling } from "../../hooks/useDeleteScheduling";
 import { Scheduling } from "../../../../types/schedule.type";
+import { useClickOutside } from "../../../../hooks/useClickOutside";
 
 type Props = {
   scheduling: Scheduling & {
@@ -19,23 +20,26 @@ export default function SchedulingCardDropdown({ scheduling }: Props) {
   const [isEditSchedulingFormOpen, setIsEditSchedulingFormOpen] =
     useState<boolean>(false);
   const { isLoading, deleteScheduling } = useDeleteScheduling();
-  // const containerRef = useRef<HTMLDivElement>(null);
+  const isEditSchedulingFormOpenRef = useRef<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // const handleDropdownClose = useCallback(() => {
-  //   console.log(isEditSchedulingFormOpen);
-  //   if (isEditSchedulingFormOpen) return;
-  //   setIsOpen(false);
-  // }, [isEditSchedulingFormOpen]);
+  function handleEditSchedulingFormOpen() {
+    setIsEditSchedulingFormOpen(true);
+    isEditSchedulingFormOpenRef.current = true;
+  }
 
-  // useClickOutside(containerRef, handleDropdownClose);
+  function handleEditSchedulingFormClose() {
+    setIsEditSchedulingFormOpen(false);
+    isEditSchedulingFormOpenRef.current = false;
+  }
 
-  // console.log(isEditSchedulingFormOpen);
+  useClickOutside(containerRef, () => {
+    if (isEditSchedulingFormOpenRef.current) return;
+    setIsOpen(false);
+  });
 
   return (
-    <div
-      // ref={containerRef}
-      className="relative"
-    >
+    <div ref={containerRef} className="relative">
       <Button
         variant="empty"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -58,7 +62,8 @@ export default function SchedulingCardDropdown({ scheduling }: Props) {
             <SchedulingCardDropdownEditButton
               scheduling={scheduling}
               isOpen={isEditSchedulingFormOpen}
-              setIsOpen={setIsEditSchedulingFormOpen}
+              onEditSchedulingFormOpen={handleEditSchedulingFormOpen}
+              onEditSchedulingFormClose={handleEditSchedulingFormClose}
             />
           </li>
           <li>

@@ -114,7 +114,7 @@ export default function ScheduleForm() {
   return (
     <FormProvider {...methods}>
       <form
-        className="scrollbar h-4/6 w-full max-w-6xl space-y-6 overflow-auto rounded-lg border-2 border-primary bg-white p-6 sm:h-auto sm:overflow-hidden"
+        className="scrollbar h-4/6 w-full max-w-6xl space-y-6 overflow-auto rounded-lg border-2 border-primary bg-white p-6 sm:h-3/4 lg:h-auto lg:overflow-hidden"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <div className="grid grid-cols-1 items-center justify-between gap-4 sm:grid-cols-2 lg:grid-cols-4">
