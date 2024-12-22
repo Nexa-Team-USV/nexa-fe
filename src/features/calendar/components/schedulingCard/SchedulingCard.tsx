@@ -83,7 +83,7 @@ export default function SchedulingCard({ scheduling }: Props) {
         </div>
         <div className="flex items-center gap-2">
           <HiMiniMapPin className="text-xl text-primary" />
-          <p>{classrooms}</p>
+          <p>{classrooms.join(", ")}</p>
         </div>
         <div className="flex items-center gap-2">
           <HiMiniUserGroup className="self-start text-xl text-primary" />
@@ -92,7 +92,9 @@ export default function SchedulingCard({ scheduling }: Props) {
       </div>
 
       <div className="ml-auto flex flex-row-reverse items-center gap-2 xsm:flex-col">
-        {role === "teacher" && <SchedulingCardDropdown schedulingId={id} />}
+        {role === "teacher" && (
+          <SchedulingCardDropdown scheduling={{ ...scheduling, classrooms }} />
+        )}
         {description && <SchedulingCardDescription description={description} />}
       </div>
     </div>

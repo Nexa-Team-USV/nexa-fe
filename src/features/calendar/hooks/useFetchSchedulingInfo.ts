@@ -9,7 +9,7 @@ export function useFetchSchedulingInfo(
   schedulingId: string,
   teacherId: string,
 ) {
-  const [classrooms, setClassrooms] = useState<string>("");
+  const [classrooms, setClassrooms] = useState<string[]>([]);
   const [teacherName, setTeacherName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

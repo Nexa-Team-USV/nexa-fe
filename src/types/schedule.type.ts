@@ -52,8 +52,18 @@ export type MonthsWithSchedulings = {
 
 export type ScheduleExamTest = z.infer<typeof scheduleExamTestSchema>;
 
+export type EditExamTest = z.infer<typeof scheduleExamTestSchema>;
+
 export type Schedule = Omit<ScheduleExamTest, "assistant" | "classroom"> & {
   classrooms: string[];
   assistants: string[];
   teacher_id: string;
+};
+
+export type EditScheduling = Omit<
+  EditExamTest,
+  "assistant" | "classroom" | "teacher_id"
+> & {
+  classrooms: string[];
+  assistants: string[];
 };
