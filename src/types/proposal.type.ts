@@ -1,27 +1,27 @@
 import { z } from "zod";
 import { examProposalSchema } from "../schemas/proposalExamTest.schema";
 
-export type ExamProposalResponse = {
-  id: number;
+export type ProposalResponse = {
+  _id: string;
   title: string;
   type: string;
   studyType: string;
   group: string;
   description?: string;
-  createdBy: number; 
-  createdAt: string; 
+  created_by: number;
+  created_at: string;
 };
 
-export type ExamProposal = {
-  id: number;
+export type Proposal = {
+  id: string;
   title: string;
-  type: string;  
+  type: string;
   studyType: string;
   group: string;
   date: string;
   description?: string;
-  proposerId: number;  
-  createdDate: string;  
+  proposerId: number;
+  createdDate: string;
 };
 export type Months =
   | "January"
@@ -38,8 +38,7 @@ export type Months =
   | "December";
 export type MonthsWithProposals = {
   month: Months;
-  monthProposals: ExamProposal[];
+  monthProposals: Proposal[];
 };
 
- 
-export type ProposalExamTest= z.infer<typeof examProposalSchema>;
+export type ProposalExamTest = z.infer<typeof examProposalSchema>;
