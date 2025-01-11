@@ -13,8 +13,13 @@ const URL = "/api/users";
 export const UserApi = {
   getCurrentUser() {
     return api
-      .get(`${URL}/current-user`)
-      .then(({ data }: AxiosResponse<UserResponse>) => data);
+      .get(`${URL}/retrieve-current-user`)
+      .then(({ data }: AxiosResponse<{ user: UserResponse }>) => data.user);
+  },
+  getUser(userId: string) {
+    return api
+      .get(`${URL}/retrieve-user/${userId}`)
+      .then(({ data }: AxiosResponse<{ user: UserResponse }>) => data.user);
   },
   getUsers(role: string, limit: number, offset: number) {
     return api

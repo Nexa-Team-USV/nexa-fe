@@ -14,12 +14,12 @@ import { Login } from "../../../types/user.type";
 import { useLogin } from "../hooks/useLogin";
 
 export default function LoginForm() {
-  const { login, isLoading, error } = useLogin();
+  const { login, isLoading } = useLogin();
   const methods = useForm<Login>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "ddd@eee.fff",
-      password: "P@rola1234",
+      email: "teacher@test.test",
+      password: "Te@cher1234",
     },
   });
   const { errors } = methods.formState;
@@ -67,12 +67,6 @@ export default function LoginForm() {
         <Button type="submit" size="full" disabled={isLoading}>
           Login
         </Button>
-
-        {error && (
-          <Message variant="error" className="text-center">
-            Something went wrong...
-          </Message>
-        )}
       </form>
     </FormProvider>
   );

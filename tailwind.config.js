@@ -16,6 +16,18 @@ module.exports = {
         xsm: "425px",
         xxsm: "320px",
       },
+      keyframes: {
+        skeleton: {
+          "0%": { left: "-50%" },
+          "100%": { left: "150%" },
+        },
+      },
+      animation: {
+        skeleton: "skeleton 1s linear infinite",
+      },
+      boxShadow: {
+        skeleton: "0 0 1rem 2rem rgba(0, 0, 0, 0.03)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

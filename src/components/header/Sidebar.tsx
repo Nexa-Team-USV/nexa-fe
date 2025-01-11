@@ -18,13 +18,11 @@ export default function Sidebar({ isOpen, setIsOpen }: Props) {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    }
+    document.body.style.overflow = "hidden";
 
-    if (!isOpen) {
+    return () => {
       document.body.style.overflow = "auto";
-    }
+    };
   }, [isOpen]);
 
   return (

@@ -11,7 +11,7 @@ export function useLogout() {
     setToken(null);
     setIsLogged(false);
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/login");
   }
 
   return { logout };

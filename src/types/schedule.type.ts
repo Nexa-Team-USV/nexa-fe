@@ -2,25 +2,33 @@ import { z } from "zod";
 import { scheduleExamTestSchema } from "../schemas/scheduleExamTest.schema";
 
 export type SchedulingResponse = {
-  id: number;
-  title: string;
+  _id: string;
   type: string;
-  description: string;
+  title: string;
+  studyType: string;
+  group: string;
   date: string;
   startTime: string;
   endTime: string;
-  teacher_id: number;
+  assistants: string;
+  description: string;
+  created_at: string;
+  teacher_id: string;
 };
 
 export type Scheduling = {
-  id: number;
-  title: string;
+  id: string;
   type: string;
-  description: string;
+  title: string;
+  studyType: string;
+  group: string;
   date: string;
   startTime: string;
   endTime: string;
-  teacherId: number;
+  assistants: string;
+  description: string;
+  createdAt: string;
+  teacherId: string;
 };
 
 export type Months =
@@ -43,3 +51,19 @@ export type MonthsWithSchedulings = {
 };
 
 export type ScheduleExamTest = z.infer<typeof scheduleExamTestSchema>;
+
+export type EditExamTest = z.infer<typeof scheduleExamTestSchema>;
+
+export type Schedule = Omit<ScheduleExamTest, "assistant" | "classroom"> & {
+  classrooms: string[];
+  assistants: string[];
+  teacher_id: string;
+};
+
+export type EditScheduling = Omit<
+  EditExamTest,
+  "assistant" | "classroom" | "teacher_id"
+> & {
+  classrooms: string[];
+  assistants: string[];
+};

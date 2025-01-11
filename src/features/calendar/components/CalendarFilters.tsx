@@ -18,22 +18,10 @@ const studyTypeOptions = [
 ];
 
 const groupOptions = [
-  {
-    value: "c3141a",
-    text: "C - 3141A",
-  },
-  {
-    value: "c3141b",
-    text: "C - 3141B",
-  },
-  {
-    value: "c3142a",
-    text: "C - 3142A",
-  },
-  {
-    value: "c3142b",
-    text: "C - 3142B",
-  },
+  { value: "C3141A", text: "C - 3141A" },
+  { value: "C3141B", text: "C - 3141B" },
+  { value: "C3142A", text: "C - 3142A" },
+  { value: "C3142B", text: "C - 3142B" },
 ];
 
 export default function CalendarFilters() {
@@ -44,6 +32,8 @@ export default function CalendarFilters() {
       group: searchParams.get("group") || "",
     },
   });
+
+  const { reset } = methods;
 
   function handleFilterSelect(
     e: ChangeEvent<HTMLSelectElement>,
@@ -56,7 +46,6 @@ export default function CalendarFilters() {
 
   function resetFilters(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const { reset } = methods;
 
     searchParams.delete("studyType");
     searchParams.delete("group");

@@ -18,7 +18,7 @@ export default function Overlay({ className, children }: Props) {
   return createPortal(
     <div
       className={twMerge(
-        "absolute left-0 top-0 flex h-screen w-full items-center justify-center bg-secondary/30 backdrop-blur-md",
+        "fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-secondary/30 p-4 backdrop-blur-md",
         className,
       )}
     >
